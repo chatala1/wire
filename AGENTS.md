@@ -2,17 +2,18 @@
 
 ## Project Overview
 
-Wire is a project repository that serves as a foundation for development. This document provides context and guidelines for AI agents working on this codebase.
+Wire is a project repository designed as a foundational codebase that can be extended and customized for various development purposes. The repository follows a minimal structure to provide flexibility for future development while maintaining clear guidelines for contributions. This document provides context and guidelines for AI agents working on this codebase.
 
 ## Project Structure
 
 ```
 wire/
-├── .github/              # GitHub configuration and workflows
-│   └── copilot-instructions.md
-├── LICENSE               # Project license
-├── README.md            # Project documentation
-└── AGENTS.md            # This file - AI agent context
+├── .git/                # Git repository data
+├── .github/             # GitHub configuration and workflows
+│   └── copilot-instructions.md  # Copilot instructions
+├── AGENTS.md            # This file - AI agent context
+├── LICENSE              # Project license (MIT)
+└── README.md            # Project documentation
 ```
 
 ## Technology Stack
