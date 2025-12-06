@@ -47,13 +47,13 @@ def generate_feed_id(url):
     """Generate a simple ID from feed URL."""
     parsed = urlparse(url)
     # Use domain and path to create ID
-    domain = parsed.netloc.replace('www.', '')
+    domain = parsed.netloc.replace('www.', '').lower()
     path = parsed.path.strip('/').replace('/', '-')
     
-    # Create simple identifier
-    if 'cisa.gov' in domain:
+    # Create simple identifier - use exact domain matching or endswith for subdomains
+    if domain == 'cisa.gov' or domain.endswith('.cisa.gov'):
         return 'cisa-gov'
-    elif 'feeder.co' in domain:
+    elif domain == 'feeder.co' or domain.endswith('.feeder.co'):
         # Extract the discovery ID if present
         match = re.search(r'/discover/([^/]+)', url)
         if match:
@@ -158,9 +158,11 @@ def extract_feed_info(feed, original_url):
         if not feed_title:
             # Try to extract from URL
             parsed = urlparse(original_url)
-            if 'cisa.gov' in parsed.netloc:
+            domain = parsed.netloc.lower()
+            # Use exact domain matching or endswith for subdomains
+            if domain == 'cisa.gov' or domain.endswith('.cisa.gov'):
                 feed_title = 'CISA Cybersecurity Advisories'
-            elif 'feeder.co' in parsed.netloc:
+            elif domain == 'feeder.co' or domain.endswith('.feeder.co'):
                 feed_title = 'Feeder Discovery Feed'
             else:
                 feed_title = parsed.netloc.replace('www.', '').split('.')[0].upper()
