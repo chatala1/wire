@@ -38,14 +38,15 @@ The RSS feed updates automatically twice daily (6 AM and 6 PM UTC), but you can 
 3. Click the **Run workflow** dropdown button
 4. Click the green **Run workflow** button
 
-This will fetch the latest Hacker News items and populate the feed.
+This will fetch the latest CISA cybersecurity advisories from https://feeder.co/discover/18fedcbe1e/cisa-gov and populate the feed-data.json file.
 
 ## Automatic Updates
 
 Once set up, the site will automatically:
-- Update the RSS feed twice daily at 6 AM and 6 PM UTC
-- Commit the new feed data to the repository
-- Display the 9 most recent Hacker News front page items
+- Update the RSS feed twice daily at 6 AM and 6 PM UTC using scripts/fetch_feed.py
+- Fetch feed data from https://feeder.co/discover/18fedcbe1e/cisa-gov
+- Commit the new feed-data.json to the repository
+- Display the 9 most recent CISA cybersecurity advisories
 
 ## Troubleshooting
 
