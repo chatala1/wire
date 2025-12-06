@@ -6,8 +6,8 @@ on:
     - cron: '0 18 * * *'  # 18:00 UTC daily
   workflow_dispatch:
 
-env:
-  FEED_URL: https://feeder.co/discover/18fedcbe1e/cisa-gov
+permissions:
+  contents: write
 
 jobs:
   update-feed:
@@ -20,26 +20,27 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
           pip install feedparser requests beautifulsoup4
 
-      - name: Fetch feed and write feed-data.json
+      - name: Fetch feeds and generate feed-data.json
+        run: |
+          python3 scripts/fetch_feed.py
         env:
-          FEED_URL: ${{ env.FEED_URL }}
-        run: |
-          python3 scripts/fetch_feed.py "$FEED_URL"
+          FEED_URLS: ${{ env.FEED_URLS }}
 
-      - name: Commit feed-data.json
+      - name: Commit and Push Feed Data
         run: |
-          git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add feed-data.json
-          git commit -m "Update feed data from ${{ env.FEED_URL }}" || echo "No changes to commit"
+          git diff --staged --quiet || git commit -m "Update feed data - $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
