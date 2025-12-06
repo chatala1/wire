@@ -1,4 +1,4 @@
-# Wire - Multi-Feed Cybersecurity Aggregator
+# Signal - Multi-Feed Cybersecurity Aggregator
 
 A dark-themed GitHub Pages site that displays cybersecurity advisories and threat intelligence from multiple RSS/Atom feeds in a clean, responsive grid layout.
 
