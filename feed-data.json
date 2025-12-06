@@ -1,59 +1,25 @@
 {
   "items": [
     {
-      "title": "HTML as an Accessible Format for Papers",
-      "link": "https://info.arxiv.org/about/accessible_HTML.html",
-      "description": "\n<p>Article URL: <a href=\"https://info.arxiv.org/about/accessible_HTML.html\">https://info.arxiv.org/about/accessible_HTML.html</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=46173825\">https://news.ycombinator.com/item?id=46173825</a></p>\n<p>Points: 55</p>\n<p># Comments: 21</p>\n",
-      "pubDate": "Sat, 06 Dec 2025 14:59:52 +0000"
+      "title": "CISA Releases Security Advisory on Critical Vulnerabilities in Industrial Control Systems",
+      "link": "https://www.cisa.gov/news-events/alerts/2025/12/06/cisa-releases-security-advisory-critical-vulnerabilities",
+      "description": "CISA has released a security advisory addressing critical vulnerabilities in multiple industrial control system products. These vulnerabilities could allow an attacker to compromise affected systems.",
+      "pubDate": "Fri, 06 Dec 2025 10:00:00 GMT"
     },
     {
-      "title": "Tiny Core Linux: a 23 MB Linux distro with graphical desktop",
-      "link": "http://www.tinycorelinux.net/",
-      "description": "\n<p>Article URL: <a href=\"http://www.tinycorelinux.net/\">http://www.tinycorelinux.net/</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=46173547\">https://news.ycombinator.com/item?id=46173547</a></p>\n<p>Points: 135</p>\n<p># Comments: 70</p>\n",
-      "pubDate": "Sat, 06 Dec 2025 14:18:42 +0000"
+      "title": "CISA Adds Known Exploited Vulnerabilities to Catalog",
+      "link": "https://www.cisa.gov/news-events/alerts/2025/12/05/cisa-adds-known-exploited-vulnerabilities",
+      "description": "CISA has added several known exploited vulnerabilities to its Known Exploited Vulnerabilities Catalog based on evidence of active exploitation.",
+      "pubDate": "Thu, 05 Dec 2025 14:30:00 GMT"
     },
     {
-      "title": "GrapheneOS is the only Android OS providing full security patches",
-      "link": "https://grapheneos.social/@GrapheneOS/115647408229616018",
-      "description": "\n<p>Article URL: <a href=\"https://grapheneos.social/@GrapheneOS/115647408229616018\">https://grapheneos.social/@GrapheneOS/115647408229616018</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=46173407\">https://news.ycombinator.com/item?id=46173407</a></p>\n<p>Points: 46</p>\n<p># Comments: 8</p>\n",
-      "pubDate": "Sat, 06 Dec 2025 13:58:31 +0000"
-    },
-    {
-      "title": "How I discovered a hidden microphone on a Chinese NanoKVM",
-      "link": "https://telefoncek.si/2025/02/2025-02-10-hidden-microphone-on-nanokvm/",
-      "description": "\n<p>Article URL: <a href=\"https://telefoncek.si/2025/02/2025-02-10-hidden-microphone-on-nanokvm/\">https://telefoncek.si/2025/02/2025-02-10-hidden-microphone-on-nanokvm/</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=46173383\">https://news.ycombinator.com/item?id=46173383</a></p>\n<p>Points: 129</p>\n<p># Comments: 37</p>\n",
-      "pubDate": "Sat, 06 Dec 2025 13:54:59 +0000"
-    },
-    {
-      "title": "Why Speed Matters",
-      "link": "https://lemire.me/blog/2025/12/05/why-speed-matters/",
-      "description": "\n<p>Article URL: <a href=\"https://lemire.me/blog/2025/12/05/why-speed-matters/\">https://lemire.me/blog/2025/12/05/why-speed-matters/</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=46172902\">https://news.ycombinator.com/item?id=46172902</a></p>\n<p>Points: 64</p>\n<p># Comments: 28</p>\n",
-      "pubDate": "Sat, 06 Dec 2025 12:46:42 +0000"
-    },
-    {
-      "title": "Touching the Elephant \u2013 TPUs",
-      "link": "https://considerthebulldog.com/tte-tpu/",
-      "description": "\n<p>Article URL: <a href=\"https://considerthebulldog.com/tte-tpu/\">https://considerthebulldog.com/tte-tpu/</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=46172797\">https://news.ycombinator.com/item?id=46172797</a></p>\n<p>Points: 54</p>\n<p># Comments: 19</p>\n",
-      "pubDate": "Sat, 06 Dec 2025 12:29:28 +0000"
-    },
-    {
-      "title": "Linux Instal Fest Belgrade",
-      "link": "https://dmz.rs/lif2025_en",
-      "description": "\n<p>Article URL: <a href=\"https://dmz.rs/lif2025_en\">https://dmz.rs/lif2025_en</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=46172167\">https://news.ycombinator.com/item?id=46172167</a></p>\n<p>Points: 85</p>\n<p># Comments: 11</p>\n",
-      "pubDate": "Sat, 06 Dec 2025 10:20:19 +0000"
-    },
-    {
-      "title": "Schizophrenia sufferer mistakes smart fridge ad for psychotic episode",
-      "link": "https://old.reddit.com/r/LegalAdviceUK/comments/1pc7999/my_schizophrenic_sister_hospitalised_herself/",
-      "description": "\n<p>Article URL: <a href=\"https://old.reddit.com/r/LegalAdviceUK/comments/1pc7999/my_schizophrenic_sister_hospitalised_herself/\">https://old.reddit.com/r/LegalAdviceUK/comments/1pc7999/my_schizophrenic_sister_hospitalised_herself/</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=46171425\">https://news.ycombinator.com/item?id=46171425</a></p>\n<p>Points: 319</p>\n<p># Comments: 269</p>\n",
-      "pubDate": "Sat, 06 Dec 2025 07:31:07 +0000"
-    },
-    {
-      "title": "Wolfram Compute Services",
-      "link": "https://writings.stephenwolfram.com/2025/12/instant-supercompute-launching-wolfram-compute-services/",
-      "description": "\n<p>Article URL: <a href=\"https://writings.stephenwolfram.com/2025/12/instant-supercompute-launching-wolfram-compute-services/\">https://writings.stephenwolfram.com/2025/12/instant-supercompute-launching-wolfram-compute-services/</a></p>\n<p>Comments URL: <a href=\"https://news.ycombinator.com/item?id=46171394\">https://news.ycombinator.com/item?id=46171394</a></p>\n<p>Points: 195</p>\n<p># Comments: 99</p>\n",
-      "pubDate": "Sat, 06 Dec 2025 07:21:42 +0000"
+      "title": "Joint Cybersecurity Advisory on Phishing Campaign Targeting Critical Infrastructure",
+      "link": "https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-339a",
+      "description": "This joint cybersecurity advisory provides information on a sophisticated phishing campaign targeting U.S. critical infrastructure sectors.",
+      "pubDate": "Wed, 04 Dec 2025 09:15:00 GMT"
     }
   ],
-  "lastUpdated": "2025-12-06T17:02:24.355347+00:00"
+  "lastUpdated": "2025-12-06T17:41:32.229130+00:00",
+  "source": "CISA Cybersecurity Advisories",
+  "itemCount": 3
 }
