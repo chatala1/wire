@@ -69,6 +69,10 @@ jobs:
                       text = elem.text or ''
                       # Get text from all children (handles CDATA and mixed content)
                       for child in elem:
+                          # Get text content of the child element itself
+                          if child.text:
+                              text += child.text
+                          # Get tail text (text after the child element)
                           if child.tail:
                               text += child.tail
                       return text.strip() if text else default

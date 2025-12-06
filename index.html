@@ -162,6 +162,14 @@
             padding: 1rem;
         }
 
+        /* Source Info */
+        .source-info {
+            text-align: center;
+            color: #666666;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .feed-grid {
@@ -333,10 +341,7 @@
                 // Display source information if available
                 if (data.source) {
                     const sourceInfo = document.createElement('div');
-                    sourceInfo.style.textAlign = 'center';
-                    sourceInfo.style.color = '#666666';
-                    sourceInfo.style.fontSize = '0.875rem';
-                    sourceInfo.style.marginTop = '0.5rem';
+                    sourceInfo.className = 'source-info';
                     sourceInfo.textContent = `Source: ${data.source}`;
                     lastUpdatedElement.appendChild(sourceInfo);
                 }
