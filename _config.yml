@@ -1,0 +1,11 @@
+# GitHub Pages Configuration
+title: Wire
+description: Hacker News Feed Reader
+theme: null
+
+# Exclude files from Jekyll processing
+exclude:
+  - .github/
+  - README.md
+  - LICENSE
+  - rss-feed.xml
