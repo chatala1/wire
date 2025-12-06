@@ -38,70 +38,15 @@ The feed updates automatically twice daily (6 AM and 6 PM UTC), but you can trig
 3. Click the **Run workflow** dropdown button
 4. Click the green **Run workflow** button
 
-This will fetch feeds from the configured sources and populate `feed-data.json`.
-
-## Feed Configuration
-
-### Default Feeds
-
-By default, the workflow fetches from:
-1. CISA Cybersecurity Advisories: `https://www.cisa.gov/cybersecurity-advisories/all.xml`
-2. Feeder Discovery (CISA): `https://feeder.co/discover/18fedcbe1e/cisa-gov`
-
-### Customizing Feed URLs
-
-To change the feeds, edit `.github/workflows/update-feed.yml` and modify the `FEED_URLS` environment variable:
-
-```yaml
-env:
-  FEED_URLS: https://example.com/feed1.xml,https://example.com/feed2.rss,https://example.com/feed3.atom
-```
-
-**Important Notes:**
-- Use comma-separated URLs for multiple feeds
-- Each feed should be a direct RSS/Atom feed URL
-- For Feeder discovery pages, use the raw RSS export URL if available (the script will attempt to find feed links, but direct RSS URLs are more reliable)
-- The script will fetch up to 9 items from each feed
-
-## Local Testing
-
-To test the feed fetching locally before pushing changes:
-
-1. **Set up a Python virtual environment** (optional but recommended):
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-2. **Install required dependencies**:
-   ```bash
-   pip install feedparser requests beautifulsoup4
-   ```
-
-3. **Run the script with your feed URLs**:
-   ```bash
-   # Using command-line argument
-   python3 scripts/fetch_feed.py "https://www.cisa.gov/cybersecurity-advisories/all.xml,https://feeder.co/discover/18fedcbe1e/cisa-gov"
-   
-   # Or using environment variable
-   FEED_URLS="https://example.com/feed.xml" python3 scripts/fetch_feed.py
-   ```
-
-4. **Inspect the output**:
-   ```bash
-   cat feed-data.json
-   ```
-
-The generated `feed-data.json` should contain a `feeds` array with each feed's items.
+This will fetch the latest CISA cybersecurity advisories from https://feeder.co/discover/18fedcbe1e/cisa-gov and populate the `feed-data.json` file.
 
 ## Automatic Updates
 
 Once set up, the site will automatically:
-- Update all configured feeds twice daily at 6 AM and 6 PM UTC
-- Parse each feed and extract up to 9 items
-- Generate `feed-data.json` with the new multi-feed structure
-- Commit and push the updated file to the repository
-- Display each feed in its own section on the site
+- Update the RSS feed twice daily at 6 AM and 6 PM UTC using `scripts/fetch_feed.py`
+- Fetch feed data from https://feeder.co/discover/18fedcbe1e/cisa-gov
+- Commit the new feed-data.json to the repository
+- Display the 9 most recent CISA cybersecurity advisories
 
 ## Troubleshooting
 
