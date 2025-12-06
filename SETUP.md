@@ -38,7 +38,7 @@ The RSS feed updates automatically twice daily (6 AM and 6 PM UTC), but you can 
 3. Click the **Run workflow** dropdown button
 4. Click the green **Run workflow** button
 
-This will fetch the latest CISA cybersecurity advisories from https://feeder.co/discover/18fedcbe1e/cisa-gov and populate the feed-data.json file.
+This will fetch the latest CISA cybersecurity advisories from https://feeder.co/discover/18fedcbe1e/cisa-gov and populate the `feed-data.json` file.
 
 ## Automatic Updates
 
