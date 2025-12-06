@@ -260,10 +260,12 @@
 
                     const description = document.createElement('div');
                     description.className = 'widget-description';
-                    // Extract text from description (remove HTML tags)
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = item.description || '';
-                    description.textContent = tempDiv.textContent.substring(0, 150) + '...';
+                    // Extract text from description (remove HTML tags) using DOMParser for security
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(item.description || '', 'text/html');
+                    const textContent = doc.body.textContent || '';
+                    const truncated = textContent.substring(0, 150);
+                    description.textContent = truncated + (textContent.length > 150 ? '...' : '');
 
                     const link = document.createElement('a');
                     link.className = 'widget-link';

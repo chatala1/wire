@@ -22,43 +22,63 @@ jobs:
 
       - name: Fetch RSS Feed
         run: |
-          curl -s https://hnrss.org/frontpage > rss-feed.xml
+          if ! curl -f -s --max-time 30 https://hnrss.org/frontpage > rss-feed.xml; then
+            echo "Error: Failed to fetch RSS feed"
+            exit 1
+          fi
+          if [ ! -s rss-feed.xml ]; then
+            echo "Error: RSS feed is empty"
+            exit 1
+          fi
 
       - name: Parse RSS and Create JSON
         run: |
           python3 << 'EOF'
           import xml.etree.ElementTree as ET
           import json
-          from datetime import datetime
+          from datetime import datetime, timezone
+          import sys
 
-          # Parse RSS feed
-          tree = ET.parse('rss-feed.xml')
-          root = tree.getroot()
+          try:
+              # Parse RSS feed with error handling
+              tree = ET.parse('rss-feed.xml')
+              root = tree.getroot()
 
-          items = []
-          for item in root.findall('.//item')[:9]:  # Get only first 9 items
-              title = item.find('title')
-              link = item.find('link')
-              description = item.find('description')
-              pubDate = item.find('pubDate')
+              items = []
+              for item in root.findall('.//item')[:9]:  # Get only first 9 items
+                  title = item.find('title')
+                  link = item.find('link')
+                  description = item.find('description')
+                  pubDate = item.find('pubDate')
+                  
+                  items.append({
+                      'title': title.text if title is not None else '',
+                      'link': link.text if link is not None else '',
+                      'description': description.text if description is not None else '',
+                      'pubDate': pubDate.text if pubDate is not None else ''
+                  })
+
+              if not items:
+                  print("Warning: No items found in RSS feed")
+                  sys.exit(1)
+
+              # Create JSON output
+              feed_data = {
+                  'items': items,
+                  'lastUpdated': datetime.now(timezone.utc).isoformat()
+              }
+
+              with open('feed-data.json', 'w') as f:
+                  json.dump(feed_data, f, indent=2)
+
+              print(f"Successfully processed {len(items)} feed items")
               
-              items.append({
-                  'title': title.text if title is not None else '',
-                  'link': link.text if link is not None else '',
-                  'description': description.text if description is not None else '',
-                  'pubDate': pubDate.text if pubDate is not None else ''
-              })
-
-          # Create JSON output
-          feed_data = {
-              'items': items,
-              'lastUpdated': datetime.utcnow().isoformat() + 'Z'
-          }
-
-          with open('feed-data.json', 'w') as f:
-              json.dump(feed_data, f, indent=2)
-
-          print(f"Successfully processed {len(items)} feed items")
+          except ET.ParseError as e:
+              print(f"Error: Failed to parse XML - {e}")
+              sys.exit(1)
+          except Exception as e:
+              print(f"Error: {e}")
+              sys.exit(1)
           EOF
 
       - name: Commit and Push Feed Data
