@@ -170,15 +170,65 @@
             margin-top: 0.5rem;
         }
 
+        /* Top Row Containers */
+        .top-row {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .top-container {
+            background-color: #0a0a0a;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .top-container:hover {
+            transform: translateY(-4px);
+            border-color: #22c55e;
+        }
+
+        .top-container-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #ffffff;
+        }
+
+        .top-container-subtitle {
+            font-size: 0.95rem;
+            color: #888888;
+            margin-bottom: 1rem;
+        }
+
+        .top-container-description {
+            font-size: 0.95rem;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .feed-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .top-row {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 640px) {
             .feed-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .top-row {
                 grid-template-columns: 1fr;
             }
 
@@ -201,6 +251,24 @@
             <li><a href="#about">About</a></li>
         </ul>
     </nav>
+
+    <div class="top-row">
+        <div class="top-container">
+            <div class="top-container-title">Title Placeholder</div>
+            <div class="top-container-subtitle">Subtitle Placeholder</div>
+            <div class="top-container-description">Description placeholder text goes here. This section can contain additional information about the content or feature.</div>
+        </div>
+        <div class="top-container">
+            <div class="top-container-title">Title Placeholder</div>
+            <div class="top-container-subtitle">Subtitle Placeholder</div>
+            <div class="top-container-description">Description placeholder text goes here. This section can contain additional information about the content or feature.</div>
+        </div>
+        <div class="top-container">
+            <div class="top-container-title">Title Placeholder</div>
+            <div class="top-container-subtitle">Subtitle Placeholder</div>
+            <div class="top-container-description">Description placeholder text goes here. This section can contain additional information about the content or feature.</div>
+        </div>
+    </div>
 
     <div class="container">
         <section id="feed">
