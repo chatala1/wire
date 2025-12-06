@@ -1,11 +1,59 @@
 {
   "items": [
     {
-      "title": "Welcome to Wire",
-      "link": "#",
-      "description": "The RSS feed will be populated automatically by GitHub Actions. The feed updates twice daily at 6 AM and 6 PM UTC.",
-      "pubDate": "2024-01-01T00:00:00Z"
+      "title": "Show HN: I built a new RSS reader for Hacker News",
+      "link": "https://example.com/article1",
+      "description": "After years of frustration with existing RSS readers, I decided to build my own. It features a clean interface and focuses on readability.",
+      "pubDate": "Mon, 06 Dec 2025 10:00:00 +0000"
+    },
+    {
+      "title": "The Evolution of Programming Languages in 2025",
+      "link": "https://example.com/article2",
+      "description": "A comprehensive look at how programming languages have evolved over the past year, with insights into new features and adoption trends.",
+      "pubDate": "Mon, 06 Dec 2025 09:45:00 +0000"
+    },
+    {
+      "title": "WebAssembly Reaches New Milestone with 100M Downloads",
+      "link": "https://example.com/article3",
+      "description": "WebAssembly continues its rapid growth as developers embrace it for high-performance web applications.",
+      "pubDate": "Mon, 06 Dec 2025 09:30:00 +0000"
+    },
+    {
+      "title": "Ask HN: What are your favorite productivity tools?",
+      "link": "https://example.com/article4",
+      "description": "Looking for recommendations on tools that have genuinely improved your workflow. What do you use daily?",
+      "pubDate": "Mon, 06 Dec 2025 09:15:00 +0000"
+    },
+    {
+      "title": "How I Optimized My Database Queries by 10x",
+      "link": "https://example.com/article5",
+      "description": "A deep dive into database optimization techniques that resulted in dramatic performance improvements.",
+      "pubDate": "Mon, 06 Dec 2025 09:00:00 +0000"
+    },
+    {
+      "title": "The State of Artificial Intelligence in Healthcare",
+      "link": "https://example.com/article6",
+      "description": "Exploring how AI is transforming medical diagnostics, treatment planning, and patient care in modern healthcare systems.",
+      "pubDate": "Mon, 06 Dec 2025 08:45:00 +0000"
+    },
+    {
+      "title": "Understanding Rust's Ownership Model",
+      "link": "https://example.com/article7",
+      "description": "A beginner-friendly guide to one of Rust's most powerful features that ensures memory safety without garbage collection.",
+      "pubDate": "Mon, 06 Dec 2025 08:30:00 +0000"
+    },
+    {
+      "title": "Why I Switched from React to Vue.js",
+      "link": "https://example.com/article8",
+      "description": "My experience migrating a large application from React to Vue.js, including challenges faced and lessons learned.",
+      "pubDate": "Mon, 06 Dec 2025 08:15:00 +0000"
+    },
+    {
+      "title": "Building Distributed Systems: A Practical Guide",
+      "link": "https://example.com/article9",
+      "description": "Learn the fundamentals of distributed systems architecture, including consistency, availability, and partition tolerance.",
+      "pubDate": "Mon, 06 Dec 2025 08:00:00 +0000"
     }
   ],
-  "lastUpdated": "2024-01-01T00:00:00Z"
+  "lastUpdated": "2025-12-06T15:45:00Z"
 }
