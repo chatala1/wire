@@ -22,12 +22,32 @@ jobs:
 
       - name: Fetch RSS Feed
         run: |
-          if ! curl -f -s --max-time 30 https://www.cisa.gov/cybersecurity-advisories/all.xml > rss-feed.xml; then
-            echo "Error: Failed to fetch RSS feed"
-            exit 1
-          fi
-          if [ ! -s rss-feed.xml ]; then
-            echo "Error: RSS feed is empty"
+          # Retry logic for network resilience
+          MAX_RETRIES=3
+          RETRY_COUNT=0
+          SUCCESS=false
+          
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ] && [ "$SUCCESS" = "false" ]; do
+            RETRY_COUNT=$((RETRY_COUNT + 1))
+            echo "Attempt $RETRY_COUNT of $MAX_RETRIES to fetch RSS feed..."
+            
+            if curl -f -s --max-time 60 --connect-timeout 10 \
+                https://www.cisa.gov/cybersecurity-advisories/all.xml > rss-feed.xml; then
+              if [ -s rss-feed.xml ]; then
+                echo "Successfully fetched RSS feed ($(wc -c < rss-feed.xml) bytes)"
+                SUCCESS=true
+              else
+                echo "Warning: RSS feed is empty, retrying..."
+                sleep 5
+              fi
+            else
+              echo "Warning: Failed to fetch RSS feed, retrying in 5 seconds..."
+              sleep 5
+            fi
+          done
+          
+          if [ "$SUCCESS" = "false" ]; then
+            echo "Error: Failed to fetch RSS feed after $MAX_RETRIES attempts"
             exit 1
           fi
 
@@ -38,46 +58,115 @@ jobs:
           import json
           from datetime import datetime, timezone
           import sys
+          import html
+
+          def get_element_text(element, tag, default=''):
+              """Safely extract text from an XML element."""
+              try:
+                  elem = element.find(tag)
+                  if elem is not None:
+                      # Handle both direct text and text with child elements
+                      text = elem.text or ''
+                      # Get text from all children (handles CDATA and mixed content)
+                      for child in elem:
+                          if child.tail:
+                              text += child.tail
+                      return text.strip() if text else default
+                  return default
+              except Exception as e:
+                  print(f"Warning: Error extracting '{tag}': {e}")
+                  return default
 
           try:
-              # Parse RSS feed with error handling
+              print("Parsing RSS feed...")
+              
+              # Parse RSS feed with explicit encoding handling
               tree = ET.parse('rss-feed.xml')
               root = tree.getroot()
+              
+              # Detect RSS version and channel
+              rss_version = root.attrib.get('version', 'unknown')
+              print(f"RSS version: {rss_version}")
+              
+              # Find channel element (may or may not exist depending on RSS structure)
+              channel = root.find('channel')
+              if channel is None:
+                  channel = root
+                  print("Warning: No explicit channel element found, using root")
+              
+              # Extract channel metadata for debugging
+              channel_title = get_element_text(channel, 'title', 'Unknown')
+              print(f"Channel title: {channel_title}")
+
+              # Find all items - try multiple xpaths for compatibility
+              items_list = []
+              for xpath in ['.//item', './channel/item', './item']:
+                  items_list = root.findall(xpath)
+                  if items_list:
+                      print(f"Found {len(items_list)} items using xpath: {xpath}")
+                      break
+              
+              if not items_list:
+                  print("Error: No items found in RSS feed")
+                  sys.exit(1)
 
               items = []
-              for item in root.findall('.//item')[:9]:  # Get only first 9 items
-                  title = item.find('title')
-                  link = item.find('link')
-                  description = item.find('description')
-                  pubDate = item.find('pubDate')
-                  
-                  items.append({
-                      'title': title.text if title is not None else '',
-                      'link': link.text if link is not None else '',
-                      'description': description.text if description is not None else '',
-                      'pubDate': pubDate.text if pubDate is not None else ''
-                  })
+              for i, item in enumerate(items_list[:9], 1):  # Get only first 9 items
+                  try:
+                      title = get_element_text(item, 'title', f'Untitled Item {i}')
+                      link = get_element_text(item, 'link', '')
+                      description = get_element_text(item, 'description', '')
+                      pubDate = get_element_text(item, 'pubDate', '')
+                      
+                      # Validate required fields
+                      if not link:
+                          print(f"Warning: Item {i} has no link, skipping")
+                          continue
+                      
+                      # Unescape HTML entities in description
+                      if description:
+                          description = html.unescape(description)
+                      
+                      items.append({
+                          'title': title,
+                          'link': link,
+                          'description': description,
+                          'pubDate': pubDate
+                      })
+                      print(f"  Processed item {i}: {title[:60]}")
+                      
+                  except Exception as e:
+                      print(f"Warning: Error processing item {i}: {e}")
+                      continue
 
               if not items:
-                  print("Warning: No items found in RSS feed")
+                  print("Error: No valid items found in RSS feed")
                   sys.exit(1)
 
               # Create JSON output
               feed_data = {
                   'items': items,
-                  'lastUpdated': datetime.now(timezone.utc).isoformat()
+                  'lastUpdated': datetime.now(timezone.utc).isoformat(),
+                  'source': 'CISA Cybersecurity Advisories',
+                  'itemCount': len(items)
               }
 
-              with open('feed-data.json', 'w') as f:
-                  json.dump(feed_data, f, indent=2)
+              with open('feed-data.json', 'w', encoding='utf-8') as f:
+                  json.dump(feed_data, f, indent=2, ensure_ascii=False)
 
-              print(f"Successfully processed {len(items)} feed items")
+              print(f"\n✓ Successfully processed {len(items)} feed items")
               
           except ET.ParseError as e:
               print(f"Error: Failed to parse XML - {e}")
+              print("This may indicate malformed RSS feed or encoding issues")
+              sys.exit(1)
+          except FileNotFoundError:
+              print("Error: rss-feed.xml not found")
               sys.exit(1)
           except Exception as e:
-              print(f"Error: {e}")
+              print(f"Error: Unexpected error - {e}")
+              import traceback
+              traceback.print_exc()
               sys.exit(1)
           EOF
 

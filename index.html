@@ -233,7 +233,13 @@
                 const grid = document.createElement('div');
                 grid.className = 'feed-grid';
 
-                data.items.slice(0, 9).forEach(item => {
+                data.items.slice(0, 9).forEach((item, index) => {
+                    // Validate item has required fields
+                    if (!item || !item.link) {
+                        console.warn(`Skipping item ${index}: missing required fields`);
+                        return;
+                    }
+                    
                     const widget = document.createElement('div');
                     widget.className = 'widget';
 
@@ -242,26 +248,57 @@
                     title.href = item.link;
                     title.target = '_blank';
                     title.rel = 'noopener noreferrer';
-                    title.textContent = item.title;
+                    // Ensure title is a string and not empty
+                    title.textContent = item.title || 'Untitled';
 
                     const meta = document.createElement('div');
                     meta.className = 'widget-meta';
-                    const pubDate = new Date(item.pubDate);
-                    meta.textContent = pubDate.toLocaleDateString('en-US', { 
-                        month: 'short', 
-                        day: 'numeric', 
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    });
+                    // Safely parse and format date
+                    let dateString = 'Date unknown';
+                    if (item.pubDate) {
+                        try {
+                            const pubDate = new Date(item.pubDate);
+                            // Check if date is valid
+                            if (!isNaN(pubDate.getTime())) {
+                                dateString = pubDate.toLocaleDateString('en-US', { 
+                                    month: 'short', 
+                                    day: 'numeric', 
+                                    year: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                });
+                            } else {
+                                // If date parsing fails, show raw date string
+                                dateString = item.pubDate;
+                            }
+                        } catch (e) {
+                            console.warn('Failed to parse date:', item.pubDate, e);
+                            dateString = item.pubDate || 'Date unknown';
+                        }
+                    }
+                    meta.textContent = dateString;
 
                     const description = document.createElement('div');
                     description.className = 'widget-description';
-                    // Extract text from description (remove HTML tags) using DOMParser for security
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(item.description || '', 'text/html');
-                    const textContent = doc.body.textContent || '';
+                    // Safely extract and sanitize text from description
+                    let textContent = '';
+                    if (item.description) {
+                        try {
+                            // Use DOMParser to safely parse HTML and extract text content
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(item.description, 'text/html');
+                            // Get text content, which automatically strips HTML tags and scripts
+                            textContent = doc.body.textContent || doc.body.innerText || '';
+                        } catch (e) {
+                            // Fallback: use the raw description if parsing fails
+                            console.warn('Failed to parse description:', e);
+                            textContent = item.description;
+                        }
+                    }
+                    // Trim whitespace and truncate
+                    textContent = textContent.trim();
                     const truncated = textContent.substring(0, 150);
+                    // Use textContent (not innerHTML) to prevent XSS
                     description.textContent = truncated + (textContent.length > 150 ? '...' : '');
 
                     const link = document.createElement('a');
@@ -283,8 +320,25 @@
 
                 // Update last updated time
                 if (data.lastUpdated) {
-                    const updateDate = new Date(data.lastUpdated);
-                    lastUpdatedElement.textContent = `Last updated: ${updateDate.toLocaleString()}`;
+                    try {
+                        const updateDate = new Date(data.lastUpdated);
+                        if (!isNaN(updateDate.getTime())) {
+                            lastUpdatedElement.textContent = `Last updated: ${updateDate.toLocaleString()}`;
+                        }
+                    } catch (e) {
+                        console.warn('Failed to parse lastUpdated date:', e);
+                    }
+                }
+                
+                // Display source information if available
+                if (data.source) {
+                    const sourceInfo = document.createElement('div');
+                    sourceInfo.style.textAlign = 'center';
+                    sourceInfo.style.color = '#666666';
+                    sourceInfo.style.fontSize = '0.875rem';
+                    sourceInfo.style.marginTop = '0.5rem';
+                    sourceInfo.textContent = `Source: ${data.source}`;
+                    lastUpdatedElement.appendChild(sourceInfo);
                 }
 
             } catch (error) {
