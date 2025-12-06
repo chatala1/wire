@@ -1,25 +1,55 @@
 {
-  "items": [
+  "fetched_at": "2025-12-06T19:30:00.000000Z",
+  "feeds": [
     {
-      "title": "CISA Releases Security Advisory on Critical Vulnerabilities in Industrial Control Systems",
-      "link": "https://www.cisa.gov/news-events/alerts/2025/12/06/cisa-releases-security-advisory-critical-vulnerabilities",
-      "description": "CISA has released a security advisory addressing critical vulnerabilities in multiple industrial control system products. These vulnerabilities could allow an attacker to compromise affected systems.",
-      "pubDate": "Fri, 06 Dec 2025 10:00:00 GMT"
+      "id": "cisa-gov",
+      "source": "CISA Cybersecurity Advisories",
+      "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+      "items": [
+        {
+          "title": "CISA Releases Security Advisory on Critical Vulnerabilities in Industrial Control Systems",
+          "link": "https://www.cisa.gov/news-events/alerts/2025/12/06/cisa-releases-security-advisory-critical-vulnerabilities",
+          "published": "Fri, 06 Dec 2025 10:00:00 GMT",
+          "summary": "CISA has released a security advisory addressing critical vulnerabilities in multiple industrial control system products. These vulnerabilities could allow an attacker to compromise affected systems."
+        },
+        {
+          "title": "CISA Adds Known Exploited Vulnerabilities to Catalog",
+          "link": "https://www.cisa.gov/news-events/alerts/2025/12/05/cisa-adds-known-exploited-vulnerabilities",
+          "published": "Thu, 05 Dec 2025 14:30:00 GMT",
+          "summary": "CISA has added several known exploited vulnerabilities to its Known Exploited Vulnerabilities Catalog based on evidence of active exploitation."
+        },
+        {
+          "title": "Joint Cybersecurity Advisory on Phishing Campaign Targeting Critical Infrastructure",
+          "link": "https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-339a",
+          "published": "Wed, 04 Dec 2025 09:15:00 GMT",
+          "summary": "This joint cybersecurity advisory provides information on a sophisticated phishing campaign targeting U.S. critical infrastructure sectors."
+        }
+      ]
     },
     {
-      "title": "CISA Adds Known Exploited Vulnerabilities to Catalog",
-      "link": "https://www.cisa.gov/news-events/alerts/2025/12/05/cisa-adds-known-exploited-vulnerabilities",
-      "description": "CISA has added several known exploited vulnerabilities to its Known Exploited Vulnerabilities Catalog based on evidence of active exploitation.",
-      "pubDate": "Thu, 05 Dec 2025 14:30:00 GMT"
-    },
-    {
-      "title": "Joint Cybersecurity Advisory on Phishing Campaign Targeting Critical Infrastructure",
-      "link": "https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-339a",
-      "description": "This joint cybersecurity advisory provides information on a sophisticated phishing campaign targeting U.S. critical infrastructure sectors.",
-      "pubDate": "Wed, 04 Dec 2025 09:15:00 GMT"
+      "id": "feeder-co-discover-18fedcbe1e",
+      "source": "Feeder: CISA Discovery",
+      "url": "https://feeder.co/discover/18fedcbe1e/cisa-gov",
+      "items": [
+        {
+          "title": "Feeder Item 1: Network Security Update",
+          "link": "https://example.com/feeder-item-1",
+          "published": "Fri, 06 Dec 2025 08:00:00 GMT",
+          "summary": "Important network security update from Feeder discovery feed for CISA related content."
+        },
+        {
+          "title": "Feeder Item 2: Threat Intelligence Report",
+          "link": "https://example.com/feeder-item-2",
+          "published": "Thu, 05 Dec 2025 16:00:00 GMT",
+          "summary": "Latest threat intelligence report highlighting emerging cybersecurity threats and mitigation strategies."
+        },
+        {
+          "title": "Feeder Item 3: Security Best Practices",
+          "link": "https://example.com/feeder-item-3",
+          "published": "Thu, 05 Dec 2025 10:00:00 GMT",
+          "summary": "Updated security best practices for protecting critical infrastructure from cyber attacks."
+        }
+      ]
     }
-  ],
-  "lastUpdated": "2025-12-06T17:41:32.229130+00:00",
-  "source": "CISA Cybersecurity Advisories",
-  "itemCount": 3
+  ]
 }

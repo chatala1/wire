@@ -231,118 +231,148 @@
 
                 const data = await response.json();
                 
-                if (!data.items || data.items.length === 0) {
+                // Handle new multi-feed structure
+                const feeds = data.feeds || [];
+                
+                // Backward compatibility: if old format (data.items), convert to new format
+                if (!feeds.length && data.items && data.items.length > 0) {
+                    feeds.push({
+                        id: 'legacy',
+                        source: data.source || 'Feed',
+                        items: data.items
+                    });
+                }
+                
+                if (feeds.length === 0) {
                     feedContainer.innerHTML = '<div class="error">No feed items available</div>';
                     return;
                 }
 
-                // Create grid with widgets
-                const grid = document.createElement('div');
-                grid.className = 'feed-grid';
+                // Clear container
+                feedContainer.innerHTML = '';
 
-                data.items.slice(0, 9).forEach((item, index) => {
-                    // Validate item has required fields
-                    if (!item || !item.link) {
-                        console.warn(`Skipping item ${index}: missing required fields`);
+                // Render each feed as a separate section
+                feeds.forEach((feed, feedIndex) => {
+                    if (!feed.items || feed.items.length === 0) {
+                        console.warn(`Feed ${feedIndex} has no items, skipping`);
                         return;
                     }
-                    
-                    const widget = document.createElement('div');
-                    widget.className = 'widget';
 
-                    const title = document.createElement('a');
-                    title.className = 'widget-title';
-                    title.href = item.link;
-                    title.target = '_blank';
-                    title.rel = 'noopener noreferrer';
-                    // Ensure title is a string and not empty
-                    title.textContent = item.title || 'Untitled';
+                    // Create feed section with title
+                    const feedSection = document.createElement('div');
+                    feedSection.className = 'feed-section';
+                    feedSection.style.marginBottom = '3rem';
 
-                    const meta = document.createElement('div');
-                    meta.className = 'widget-meta';
-                    // Safely parse and format date
-                    let dateString = 'Date unknown';
-                    if (item.pubDate) {
-                        try {
-                            const pubDate = new Date(item.pubDate);
-                            // Check if date is valid
-                            if (!isNaN(pubDate.getTime())) {
-                                dateString = pubDate.toLocaleDateString('en-US', { 
-                                    month: 'short', 
-                                    day: 'numeric', 
-                                    year: 'numeric',
-                                    hour: '2-digit',
-                                    minute: '2-digit'
-                                });
-                            } else {
-                                // If date parsing fails, show raw date string
-                                dateString = item.pubDate;
+                    const feedTitle = document.createElement('h2');
+                    feedTitle.textContent = feed.source || 'Feed';
+                    feedTitle.style.fontSize = '2rem';
+                    feedTitle.style.marginBottom = '2rem';
+                    feedTitle.style.paddingBottom = '0.5rem';
+                    feedTitle.style.borderBottom = '2px solid #333333';
+                    feedSection.appendChild(feedTitle);
+
+                    // Create grid with widgets for this feed
+                    const grid = document.createElement('div');
+                    grid.className = 'feed-grid';
+
+                    feed.items.slice(0, 9).forEach((item, index) => {
+                        // Validate item has required fields
+                        if (!item || !item.link) {
+                            console.warn(`Feed ${feedIndex}, item ${index}: missing required fields`);
+                            return;
+                        }
+                        
+                        const widget = document.createElement('div');
+                        widget.className = 'widget';
+
+                        const title = document.createElement('a');
+                        title.className = 'widget-title';
+                        title.href = item.link;
+                        title.target = '_blank';
+                        title.rel = 'noopener noreferrer';
+                        // Ensure title is a string and not empty
+                        title.textContent = item.title || 'Untitled';
+
+                        const meta = document.createElement('div');
+                        meta.className = 'widget-meta';
+                        // Safely parse and format date (handle both 'pubDate' and 'published')
+                        let dateString = 'Date unknown';
+                        const dateValue = item.published || item.pubDate;
+                        if (dateValue) {
+                            try {
+                                const pubDate = new Date(dateValue);
+                                // Check if date is valid
+                                if (!isNaN(pubDate.getTime())) {
+                                    dateString = pubDate.toLocaleDateString('en-US', { 
+                                        month: 'short', 
+                                        day: 'numeric', 
+                                        year: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit'
+                                    });
+                                } else {
+                                    // If date parsing fails, show raw date string
+                                    dateString = dateValue;
+                                }
+                            } catch (e) {
+                                console.warn('Failed to parse date:', dateValue, e);
+                                dateString = dateValue || 'Date unknown';
                             }
-                        } catch (e) {
-                            console.warn('Failed to parse date:', item.pubDate, e);
-                            dateString = item.pubDate || 'Date unknown';
                         }
-                    }
-                    meta.textContent = dateString;
+                        meta.textContent = dateString;
 
-                    const description = document.createElement('div');
-                    description.className = 'widget-description';
-                    // Safely extract and sanitize text from description
-                    let textContent = '';
-                    if (item.description) {
-                        try {
-                            // Use DOMParser to safely parse HTML and extract text content
-                            const parser = new DOMParser();
-                            const doc = parser.parseFromString(item.description, 'text/html');
-                            // Get text content, which automatically strips HTML tags and scripts
-                            textContent = doc.body.textContent || doc.body.innerText || '';
-                        } catch (e) {
-                            // Fallback: use the raw description if parsing fails
-                            console.warn('Failed to parse description:', e);
-                            textContent = item.description;
+                        const description = document.createElement('div');
+                        description.className = 'widget-description';
+                        // Safely extract and sanitize text from description/summary
+                        let textContent = '';
+                        const descValue = item.summary || item.description;
+                        if (descValue) {
+                            try {
+                                // Use DOMParser to safely parse HTML and extract text content
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(descValue, 'text/html');
+                                // Get text content, which automatically strips HTML tags and scripts
+                                textContent = doc.body.textContent || doc.body.innerText || '';
+                            } catch (e) {
+                                // Fallback: use the raw description if parsing fails
+                                console.warn('Failed to parse description:', e);
+                                textContent = descValue;
+                            }
                         }
-                    }
-                    // Trim whitespace and truncate
-                    textContent = textContent.trim();
-                    const truncated = textContent.substring(0, 150);
-                    // Use textContent (not innerHTML) to prevent XSS
-                    description.textContent = truncated + (textContent.length > 150 ? '...' : '');
+                        // Trim whitespace and truncate
+                        textContent = textContent.trim();
+                        const truncated = textContent.substring(0, 150);
+                        // Use textContent (not innerHTML) to prevent XSS
+                        description.textContent = truncated + (textContent.length > 150 ? '...' : '');
 
-                    const link = document.createElement('a');
-                    link.className = 'widget-link';
-                    link.href = item.link;
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-                    link.textContent = 'Read more →';
+                        const link = document.createElement('a');
+                        link.className = 'widget-link';
+                        link.href = item.link;
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+                        link.textContent = 'Read more →';
 
-                    widget.appendChild(title);
-                    widget.appendChild(meta);
-                    widget.appendChild(description);
-                    widget.appendChild(link);
-                    grid.appendChild(widget);
+                        widget.appendChild(title);
+                        widget.appendChild(meta);
+                        widget.appendChild(description);
+                        widget.appendChild(link);
+                        grid.appendChild(widget);
+                    });
+
+                    feedSection.appendChild(grid);
+                    feedContainer.appendChild(feedSection);
                 });
 
-                feedContainer.innerHTML = '';
-                feedContainer.appendChild(grid);
-
                 // Update last updated time
-                if (data.lastUpdated) {
+                if (data.fetched_at || data.lastUpdated) {
                     try {
-                        const updateDate = new Date(data.lastUpdated);
+                        const updateDate = new Date(data.fetched_at || data.lastUpdated);
                         if (!isNaN(updateDate.getTime())) {
                             lastUpdatedElement.textContent = `Last updated: ${updateDate.toLocaleString()}`;
                         }
                     } catch (e) {
                         console.warn('Failed to parse lastUpdated date:', e);
                     }
-                }
-                
-                // Display source information if available
-                if (data.source) {
-                    const sourceInfo = document.createElement('div');
-                    sourceInfo.className = 'source-info';
-                    sourceInfo.textContent = `Source: ${data.source}`;
-                    lastUpdatedElement.appendChild(sourceInfo);
                 }
 
             } catch (error) {
