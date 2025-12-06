@@ -8,7 +8,7 @@ A dark-themed GitHub Pages site that displays the 9 most recent CISA cybersecuri
 - **Responsive Grid Layout**: 3-column grid on desktop, adapts to 2 columns on tablets and 1 column on mobile
 - **Auto-Updates**: RSS feed is automatically fetched and updated twice daily (6 AM and 6 PM UTC)
 - **Navigation Bar**: Simple navigation with title on the left and section links on the right
-- **RSS Integration**: Displays the 9 most recent items from https://www.cisa.gov/cybersecurity-advisories/all.xml
+- **RSS Integration**: Displays the 9 most recent items from https://feeder.co/discover/18fedcbe1e/cisa-gov (CISA cybersecurity advisories via Feeder)
 
 ## Setup
 
@@ -19,9 +19,9 @@ A dark-themed GitHub Pages site that displays the 9 most recent CISA cybersecuri
    - Select folder: `/ (root)`
 
 2. The GitHub Action will automatically run:
-   - On push to main/master branch
    - Twice daily at 6 AM and 6 PM UTC
    - Can be manually triggered from the Actions tab
+   - Fetches feed data using scripts/fetch_feed.py and generates feed-data.json
 
 ## Technology Stack
 
