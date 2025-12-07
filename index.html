@@ -138,9 +138,12 @@
         /* Loading State */
         .loading {
             text-align: center;
-            padding: 3rem;
             color: #888888;
             font-size: 1.2rem;
+        }
+        
+        .loading-message {
+            padding: 3rem;
         }
 
         /* Error State */
@@ -270,8 +273,8 @@
         </div>
 
         <section id="feed">
-            <div id="feed-container" class="loading">
-                Loading feed...
+            <div id="feed-container">
+                <div class="loading loading-message">Loading feed...</div>
             </div>
             <p style="color: #cccccc; text-align:center;">The feed is automatically updated twice daily.</p>
             <div id="last-updated" class="last-updated"></div>
