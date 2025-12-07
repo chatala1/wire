@@ -213,6 +213,33 @@
             line-height: 1.6;
         }
 
+        /* Footer */
+        footer {
+            background-color: rgba(0,0,0,0.90);
+            padding: 1.5rem 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid #333333;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #22c55e;
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .feed-grid {
@@ -239,6 +266,11 @@
             }
 
             .nav-links {
+                gap: 1rem;
+            }
+
+            .footer-links {
+                justify-content: center;
                 gap: 1rem;
             }
         }
@@ -516,5 +548,14 @@
         // Load feed when page loads
         document.addEventListener('DOMContentLoaded', loadFeed);
     </script>
+
+    <footer>
+        <ul class="footer-links">
+            <li><a href="https://www.pizzint.watch/" target="_blank" rel="noopener noreferrer">Bilateral Tension Monitor</a></li>
+            <li><a href="https://h1dr4.dev/" target="_blank" rel="noopener noreferrer">GDELT ODIN AI</a></li>
+            <li><a href="https://worldtensionwatch.com/analytics" target="_blank" rel="noopener noreferrer">Tension Watch</a></li>
+            <li><a href="https://threatmap.bitdefender.com/" target="_blank" rel="noopener noreferrer">Cyber Attack Mapping</a></li>
+        </ul>
+    </footer>
 </body>
 </html>
