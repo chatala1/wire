@@ -59,6 +59,8 @@ def generate_feed_id(url):
         if match:
             return f'feeder-co-discover-{match.group(1)[:12]}'
         return 'feeder-co'
+    elif domain == 'thecyberwire.com' or domain.endswith('.thecyberwire.com'):
+        return 'cyberwire'
     else:
         # Generic ID from domain and path
         base_id = domain.split('.')[0] if '.' in domain else domain
@@ -156,6 +158,8 @@ def extract_feed_info(feed, original_url):
                 feed_title = 'CISA Cybersecurity Advisories'
             elif domain == 'feeder.co' or domain.endswith('.feeder.co'):
                 feed_title = 'Feeder Discovery Feed'
+            elif domain == 'thecyberwire.com' or domain.endswith('.thecyberwire.com'):
+                feed_title = 'The CyberWire'
             else:
                 feed_title = parsed.netloc.replace('www.', '').split('.')[0].upper()
     else:

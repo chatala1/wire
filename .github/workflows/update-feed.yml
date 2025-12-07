@@ -13,7 +13,7 @@ jobs:
   update-feed:
     runs-on: ubuntu-latest
     env:
-      FEED_URLS: https://www.cisa.gov/cybersecurity-advisories/all.xml,https://feeder.co/discover/18fedcbe1e/cisa-gov
+      FEED_URLS: https://www.cisa.gov/cybersecurity-advisories/all.xml,https://feeder.co/discover/18fedcbe1e/cisa-gov,https://www.thecyberwire.com/feeds/rss.xml
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
