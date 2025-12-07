@@ -354,9 +354,10 @@
 
                 // Populate CyberWire box (2nd box in top row)
                 const cyberWireFeed = feeds.find(feed => feed.id === 'cyberwire');
+                const cyberWireBox = document.getElementById('cyberwire-box');
+                
                 if (cyberWireFeed && cyberWireFeed.items && cyberWireFeed.items.length > 0) {
                     const latestItem = cyberWireFeed.items[0];
-                    const cyberWireBox = document.getElementById('cyberwire-box');
                     
                     if (cyberWireBox && latestItem.link) {
                         // Create clickable title link
@@ -413,6 +414,19 @@
                         textContent = textContent.trim();
                         const truncated = textContent.substring(0, 200);
                         descElement.textContent = truncated + (textContent.length > 200 ? '...' : '');
+                    }
+                } else {
+                    // Show message when CyberWire feed is not available
+                    if (cyberWireBox) {
+                        console.warn('CyberWire feed not available in feed data');
+                        const titleElement = cyberWireBox.querySelector('.top-container-title');
+                        titleElement.textContent = 'The CyberWire';
+                        
+                        const subtitleElement = cyberWireBox.querySelector('.top-container-subtitle');
+                        subtitleElement.textContent = 'Daily Cybersecurity News Briefing';
+                        
+                        const descElement = cyberWireBox.querySelector('.top-container-description');
+                        descElement.textContent = 'The CyberWire feed is currently unavailable. Please check back later for the latest cybersecurity news and analysis.';
                     }
                 }
 
