@@ -69,6 +69,16 @@ def generate_feed_id(url):
         return base_id.replace('.', '-')
 
 
+def get_bozo_error_message(feed):
+    """Extract error message from feedparser bozo exception."""
+    if not hasattr(feed, 'bozo') or not feed.bozo:
+        return None
+    exception = getattr(feed, 'bozo_exception', None)
+    if exception is None:
+        return 'Unknown parsing error'
+    return str(exception)
+
+
 def fetch_feed_with_fallback(url, session):
     """
     Fetch feed with multiple fallback strategies.
@@ -91,12 +101,12 @@ def fetch_feed_with_fallback(url, session):
         if feed.entries:
             print(f"  ✓ Successfully parsed feed directly ({len(feed.entries)} entries)")
             return feed, url
-        elif hasattr(feed, 'bozo') and feed.bozo:
-            # Feed has parsing errors
-            bozo_msg = str(feed.bozo_exception) if hasattr(feed, 'bozo_exception') else 'Unknown error'
-            print(f"  ⚠ Feed parsing had errors: {bozo_msg}")
         else:
-            print(f"  ⚠ Feed fetched but contains no entries")
+            bozo_msg = get_bozo_error_message(feed)
+            if bozo_msg:
+                print(f"  ⚠ Feed parsing had errors: {bozo_msg}")
+            else:
+                print(f"  ⚠ Feed fetched but contains no entries")
     except Exception as e:
         print(f"  ⚠ Direct fetch failed: {e}")
     
@@ -113,9 +123,10 @@ def fetch_feed_with_fallback(url, session):
                 if feed.entries:
                     print(f"  ✓ Successfully parsed with {suffix} suffix ({len(feed.entries)} entries)")
                     return feed, try_url
-                elif hasattr(feed, 'bozo') and feed.bozo:
-                    bozo_msg = str(feed.bozo_exception) if hasattr(feed, 'bozo_exception') else 'Unknown error'
-                    print(f"  ⚠ Feed parsing had errors with {suffix}: {bozo_msg}")
+                else:
+                    bozo_msg = get_bozo_error_message(feed)
+                    if bozo_msg:
+                        print(f"  ⚠ Feed parsing had errors with {suffix}: {bozo_msg}")
             except Exception as e:
                 print(f"  ⚠ Failed with {suffix}: {e}")
     
@@ -145,9 +156,10 @@ def fetch_feed_with_fallback(url, session):
                     if feed.entries:
                         print(f"  ✓ Successfully parsed linked feed ({len(feed.entries)} entries)")
                         return feed, feed_url
-                    elif hasattr(feed, 'bozo') and feed.bozo:
-                        bozo_msg = str(feed.bozo_exception) if hasattr(feed, 'bozo_exception') else 'Unknown error'
-                        print(f"  ⚠ Linked feed parsing had errors: {bozo_msg}")
+                    else:
+                        bozo_msg = get_bozo_error_message(feed)
+                        if bozo_msg:
+                            print(f"  ⚠ Linked feed parsing had errors: {bozo_msg}")
                 except Exception as e:
                     print(f"  ⚠ Failed to fetch linked feed: {e}")
     except Exception as e:
