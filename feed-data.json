@@ -70,55 +70,55 @@
         {
           "title": "Daily Briefing: Cybersecurity threats and defense strategies",
           "link": "https://www.thecyberwire.com/newsletters/daily-briefing/13/1",
-          "published": "Sat, 07 Dec 2025 12:00:00 +0000",
+          "published": "Sat, 07 Dec 25 12:00:00 +0000",
           "summary": "Today's edition covers emerging cybersecurity threats, nation-state activities, ransomware trends, and the latest security advisories. Key topics include critical vulnerabilities in enterprise software, ongoing disinformation campaigns, and defense strategies for organizations. Industry experts weigh in on the evolving threat landscape and best practices for maintaining robust security postures in an increasingly connected world."
         },
         {
           "title": "Research Saturday: Advanced persistent threat analysis",
           "link": "https://www.thecyberwire.com/podcasts/research-saturday/312/notes",
-          "published": "Fri, 06 Dec 2025 10:00:00 +0000",
+          "published": "Fri, 06 Dec 25 10:00:00 +0000",
           "summary": "This week's research deep-dive examines sophisticated attack methodologies employed by state-sponsored actors. Security researchers discuss attribution challenges, infrastructure analysis, and defensive countermeasures. The episode features detailed technical breakdowns of recent campaigns and provides actionable intelligence for security teams."
         },
         {
           "title": "Cybersecurity news roundup: Week in review",
           "link": "https://www.thecyberwire.com/newsletters/weekly-roundup/52/1",
-          "published": "Thu, 05 Dec 2025 18:00:00 +0000",
+          "published": "Thu, 05 Dec 25 18:00:00 +0000",
           "summary": "A comprehensive summary of this week's most significant cybersecurity developments. Coverage includes major data breaches, regulatory updates, threat actor activity, security patches, and industry analysis. The roundup aggregates insights from across the security community to help professionals stay informed about the rapidly evolving cyber landscape."
         },
         {
           "title": "Hacking Humans: Social engineering tactics exposed",
           "link": "https://www.thecyberwire.com/podcasts/hacking-humans/285/notes",
-          "published": "Wed, 04 Dec 2025 16:30:00 +0000",
+          "published": "Wed, 04 Dec 25 16:30:00 +0000",
           "summary": "An exploration of current social engineering techniques targeting organizations and individuals. This episode discusses phishing campaigns, business email compromise schemes, and psychological manipulation tactics. Security awareness experts provide guidance on identifying and mitigating these human-centric attacks."
         },
         {
           "title": "Daily Briefing: Zero-day vulnerabilities and patch priorities",
           "link": "https://www.thecyberwire.com/newsletters/daily-briefing/13/2",
-          "published": "Tue, 03 Dec 2025 12:00:00 +0000",
+          "published": "Tue, 03 Dec 25 12:00:00 +0000",
           "summary": "Critical security updates and newly discovered vulnerabilities dominate today's briefing. Security teams are advised to prioritize patching efforts for actively exploited flaws affecting enterprise infrastructure. The briefing includes exploit timelines, vendor responses, and risk assessments to help organizations make informed decisions about their security posture."
         },
         {
           "title": "CyberWire Pro: Threat intelligence briefing",
           "link": "https://www.thecyberwire.com/pro/briefing/2025/12/02",
-          "published": "Mon, 02 Dec 2025 09:00:00 +0000",
+          "published": "Mon, 02 Dec 25 09:00:00 +0000",
           "summary": "An executive-level briefing on current cyber threats impacting critical infrastructure and enterprise operations. This report synthesizes intelligence from multiple sources to provide strategic insights into adversary capabilities, tactics, and targets. Leaders receive actionable recommendations for enhancing organizational resilience."
         },
         {
           "title": "Caveat: Policy and legal implications of cyber operations",
           "link": "https://www.thecyberwire.com/podcasts/caveat/198/notes",
-          "published": "Sun, 01 Dec 2025 14:00:00 +0000",
+          "published": "Sun, 01 Dec 25 14:00:00 +0000",
           "summary": "A discussion of the legal and policy dimensions surrounding cybersecurity and cyber warfare. Topics include international law, attribution challenges, proportionality in cyber responses, and emerging regulatory frameworks. Legal experts and policy analysts provide context for understanding the evolving rules of engagement in cyberspace."
         },
         {
           "title": "Daily Briefing: Ransomware operations and mitigation",
           "link": "https://www.thecyberwire.com/newsletters/daily-briefing/13/3",
-          "published": "Sat, 30 Nov 2025 12:00:00 +0000",
+          "published": "Sat, 30 Nov 25 12:00:00 +0000",
           "summary": "Analysis of recent ransomware campaigns affecting healthcare, education, and government sectors. Security researchers detail attack vectors, encryption methods, and recovery options. The briefing emphasizes the importance of backup strategies, incident response planning, and cross-sector information sharing to combat the ransomware epidemic."
         },
         {
           "title": "Industry voices: CISO perspectives on emerging challenges",
           "link": "https://www.thecyberwire.com/stories/industry-voices-202511",
-          "published": "Fri, 29 Nov 2025 16:00:00 +0000",
+          "published": "Fri, 29 Nov 25 16:00:00 +0000",
           "summary": "Leading Chief Information Security Officers share their insights on navigating today's complex threat environment. Discussions cover workforce challenges, budget constraints, board-level communication, and strategic planning. CISOs from various industries offer practical advice for peers facing similar challenges in protecting their organizations."
         }
       ]
