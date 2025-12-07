@@ -87,9 +87,15 @@ def fetch_feed_with_fallback(url, session):
         content = response.content
         feed = feedparser.parse(content)
         
+        # Check if feed parsed successfully and has entries
         if feed.entries:
             print(f"  ✓ Successfully parsed feed directly ({len(feed.entries)} entries)")
             return feed, url
+        elif hasattr(feed, 'bozo') and feed.bozo:
+            # Feed has parsing errors
+            print(f"  ⚠ Feed parsing had errors: {feed.get('bozo_exception', 'Unknown error')}")
+        else:
+            print(f"  ⚠ Feed fetched but contains no entries")
     except Exception as e:
         print(f"  ⚠ Direct fetch failed: {e}")
     
@@ -106,6 +112,8 @@ def fetch_feed_with_fallback(url, session):
                 if feed.entries:
                     print(f"  ✓ Successfully parsed with {suffix} suffix ({len(feed.entries)} entries)")
                     return feed, try_url
+                elif hasattr(feed, 'bozo') and feed.bozo:
+                    print(f"  ⚠ Feed parsing had errors with {suffix}: {feed.get('bozo_exception', 'Unknown error')}")
             except Exception as e:
                 print(f"  ⚠ Failed with {suffix}: {e}")
     
@@ -135,6 +143,8 @@ def fetch_feed_with_fallback(url, session):
                     if feed.entries:
                         print(f"  ✓ Successfully parsed linked feed ({len(feed.entries)} entries)")
                         return feed, feed_url
+                    elif hasattr(feed, 'bozo') and feed.bozo:
+                        print(f"  ⚠ Linked feed parsing had errors: {feed.get('bozo_exception', 'Unknown error')}")
                 except Exception as e:
                     print(f"  ⚠ Failed to fetch linked feed: {e}")
     except Exception as e:
