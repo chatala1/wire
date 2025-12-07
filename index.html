@@ -260,7 +260,7 @@
                 <div class="top-container-subtitle">Subtitle Placeholder</div>
                 <div class="top-container-description">Description placeholder text goes here. This section can contain additional information about the content or feature.</div>
             </div>
-            <div class="top-container">
+            <div class="top-container" id="cyberwire-box">
                 <div class="top-container-title">Title Placeholder</div>
                 <div class="top-container-subtitle">Subtitle Placeholder</div>
                 <div class="top-container-description">Description placeholder text goes here. This section can contain additional information about the content or feature.</div>
@@ -310,6 +310,70 @@
                 if (feeds.length === 0) {
                     feedContainer.innerHTML = '<div class="error">No feed items available</div>';
                     return;
+                }
+
+                // Populate CyberWire box (2nd box in top row)
+                const cyberWireFeed = feeds.find(feed => feed.id === 'cyberwire');
+                if (cyberWireFeed && cyberWireFeed.items && cyberWireFeed.items.length > 0) {
+                    const latestItem = cyberWireFeed.items[0];
+                    const cyberWireBox = document.getElementById('cyberwire-box');
+                    
+                    if (cyberWireBox && latestItem.link) {
+                        // Create clickable title link
+                        const titleElement = cyberWireBox.querySelector('.top-container-title');
+                        titleElement.innerHTML = '';
+                        const titleLink = document.createElement('a');
+                        titleLink.href = latestItem.link;
+                        titleLink.target = '_blank';
+                        titleLink.rel = 'noopener noreferrer';
+                        // Clean title by removing common prefixes
+                        let cleanTitle = latestItem.title || 'Untitled';
+                        cleanTitle = cleanTitle.replace(/^(Latest CyberWire News:\s*|CyberWire:\s*|The CyberWire:\s*)/i, '');
+                        titleLink.textContent = cleanTitle;
+                        titleLink.style.color = '#ffffff';
+                        titleLink.style.textDecoration = 'none';
+                        titleLink.style.transition = 'color 0.3s';
+                        titleLink.onmouseover = function() { this.style.color = '#22c55e'; };
+                        titleLink.onmouseout = function() { this.style.color = '#ffffff'; };
+                        titleElement.appendChild(titleLink);
+                        
+                        // Set subtitle with date
+                        const subtitleElement = cyberWireBox.querySelector('.top-container-subtitle');
+                        let dateString = 'The CyberWire';
+                        const dateValue = latestItem.published || latestItem.pubDate;
+                        if (dateValue) {
+                            try {
+                                const pubDate = new Date(dateValue);
+                                if (!isNaN(pubDate.getTime())) {
+                                    dateString = `The CyberWire - ${pubDate.toLocaleDateString('en-US', { 
+                                        month: 'short', 
+                                        day: 'numeric', 
+                                        year: 'numeric'
+                                    })}`;
+                                }
+                            } catch (e) {
+                                console.warn('Failed to parse date for CyberWire:', e);
+                            }
+                        }
+                        subtitleElement.textContent = dateString;
+                        
+                        // Set description with truncated summary
+                        const descElement = cyberWireBox.querySelector('.top-container-description');
+                        let textContent = '';
+                        const descValue = latestItem.summary || latestItem.description;
+                        if (descValue) {
+                            try {
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(descValue, 'text/html');
+                                textContent = doc.body.textContent || doc.body.innerText || '';
+                            } catch (e) {
+                                textContent = descValue;
+                            }
+                        }
+                        textContent = textContent.trim();
+                        const truncated = textContent.substring(0, 200);
+                        descElement.textContent = truncated + (textContent.length > 200 ? '...' : '');
+                    }
                 }
 
                 // Clear container
