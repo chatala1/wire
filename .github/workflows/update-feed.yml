@@ -13,8 +13,8 @@ jobs:
   update-feed:
     runs-on: ubuntu-latest
     env:
-      # Feed sources: CISA Advisories, Feeder CISA Discovery, The CyberWire RSS, UpGuard Breach Reports, CIS Security Threat Level
-      FEED_URLS: https://www.cisa.gov/cybersecurity-advisories/all.xml,https://feeder.co/discover/18fedcbe1e/cisa-gov,https://www.thecyberwire.com/feeds/rss.xml,https://www.upguard.com/breaches/rss.xml,https://feeder.co/discover/769cf44983/cisecurity-org
+      # Feed source: The Record Media
+      FEED_URLS: https://therecord.media/feed/
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
