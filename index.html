@@ -570,22 +570,42 @@
                         let threatLevel = 'UNKNOWN';
                         let ledClass = '';
                         
-                        // Check title and description for threat level keywords
-                        const text = (latestItem.title + ' ' + latestItem.summary).toUpperCase();
+                        // Check title first, then description for threat level keywords
+                        const title = (latestItem.title || '').toUpperCase();
+                        const summary = (latestItem.summary || '').toUpperCase();
                         
-                        if (text.includes('SEVERE') || text.includes('RED')) {
+                        // Priority order: Check title for exact word boundaries first
+                        // This ensures we match the correct level even if multiple levels are mentioned
+                        if (/\bSEVERE\b/.test(title) || /\bRED\b/.test(title)) {
                             threatLevel = 'SEVERE';
                             ledClass = 'led-severe';
-                        } else if (text.includes('HIGH') || text.includes('ORANGE')) {
+                        } else if (/\bHIGH\b/.test(title) || /\bORANGE\b/.test(title)) {
                             threatLevel = 'HIGH';
                             ledClass = 'led-high';
-                        } else if (text.includes('ELEVATED') || text.includes('YELLOW')) {
+                        } else if (/\bELEVATED\b/.test(title) || /\bYELLOW\b/.test(title)) {
                             threatLevel = 'ELEVATED';
                             ledClass = 'led-elevated';
-                        } else if (text.includes('GUARDED') || text.includes('BLUE')) {
+                        } else if (/\bGUARDED\b/.test(title) || /\bBLUE\b/.test(title)) {
                             threatLevel = 'GUARDED';
                             ledClass = 'led-guarded';
-                        } else if (text.includes('LOW') || text.includes('GREEN')) {
+                        } else if (/\bLOW\b/.test(title) || /\bGREEN\b/.test(title)) {
+                            threatLevel = 'LOW';
+                            ledClass = 'led-low';
+                        } 
+                        // If not found in title, check summary
+                        else if (/\bSEVERE\b/.test(summary) || /\bRED\b/.test(summary)) {
+                            threatLevel = 'SEVERE';
+                            ledClass = 'led-severe';
+                        } else if (/\bHIGH\b/.test(summary) || /\bORANGE\b/.test(summary)) {
+                            threatLevel = 'HIGH';
+                            ledClass = 'led-high';
+                        } else if (/\bELEVATED\b/.test(summary) || /\bYELLOW\b/.test(summary)) {
+                            threatLevel = 'ELEVATED';
+                            ledClass = 'led-elevated';
+                        } else if (/\bGUARDED\b/.test(summary) || /\bBLUE\b/.test(summary)) {
+                            threatLevel = 'GUARDED';
+                            ledClass = 'led-guarded';
+                        } else if (/\bLOW\b/.test(summary) || /\bGREEN\b/.test(summary)) {
                             threatLevel = 'LOW';
                             ledClass = 'led-low';
                         }
