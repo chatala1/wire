@@ -304,7 +304,7 @@
                 <div class="top-container-subtitle">Subtitle Placeholder</div>
                 <div class="top-container-description">Description placeholder text goes here. This section can contain additional information about the content or feature.</div>
             </div>
-            <div class="top-container">
+            <div class="top-container" id="upguard-box">
                 <div class="top-container-title">Title Placeholder</div>
                 <div class="top-container-subtitle">Subtitle Placeholder</div>
                 <div class="top-container-description">Description placeholder text goes here. This section can contain additional information about the content or feature.</div>
@@ -427,6 +427,83 @@
                         
                         const descElement = cyberWireBox.querySelector('.top-container-description');
                         descElement.textContent = 'The CyberWire feed is currently unavailable. Please check back later for the latest cybersecurity news and analysis.';
+                    }
+                }
+
+                // Populate UpGuard box (3rd box in top row)
+                const upguardFeed = feeds.find(feed => feed.id === 'upguard');
+                const upguardBox = document.getElementById('upguard-box');
+                
+                if (upguardFeed && upguardFeed.items && upguardFeed.items.length > 0) {
+                    const latestItem = upguardFeed.items[0];
+                    
+                    if (upguardBox && latestItem.link) {
+                        // Create clickable title link
+                        const titleElement = upguardBox.querySelector('.top-container-title');
+                        titleElement.innerHTML = '';
+                        const titleLink = document.createElement('a');
+                        titleLink.href = latestItem.link;
+                        titleLink.target = '_blank';
+                        titleLink.rel = 'noopener noreferrer';
+                        // Clean title
+                        let cleanTitle = latestItem.title || 'Untitled';
+                        titleLink.textContent = cleanTitle;
+                        titleLink.style.color = '#ffffff';
+                        titleLink.style.textDecoration = 'none';
+                        titleLink.style.transition = 'color 0.3s';
+                        titleLink.onmouseover = function() { this.style.color = '#22c55e'; };
+                        titleLink.onmouseout = function() { this.style.color = '#ffffff'; };
+                        titleElement.appendChild(titleLink);
+                        
+                        // Set subtitle with date
+                        const subtitleElement = upguardBox.querySelector('.top-container-subtitle');
+                        let dateString = 'UpGuard Breach Report';
+                        const dateValue = latestItem.published || latestItem.pubDate;
+                        if (dateValue) {
+                            try {
+                                const pubDate = new Date(dateValue);
+                                if (!isNaN(pubDate.getTime())) {
+                                    dateString = `UpGuard - ${pubDate.toLocaleDateString('en-US', { 
+                                        month: 'short', 
+                                        day: 'numeric', 
+                                        year: 'numeric'
+                                    })}`;
+                                }
+                            } catch (e) {
+                                console.warn('Failed to parse date for UpGuard:', e);
+                            }
+                        }
+                        subtitleElement.textContent = dateString;
+                        
+                        // Set description with truncated summary
+                        const descElement = upguardBox.querySelector('.top-container-description');
+                        let textContent = '';
+                        const descValue = latestItem.summary || latestItem.description;
+                        if (descValue) {
+                            try {
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(descValue, 'text/html');
+                                textContent = doc.body.textContent || doc.body.innerText || '';
+                            } catch (e) {
+                                textContent = descValue;
+                            }
+                        }
+                        textContent = textContent.trim();
+                        const truncated = textContent.substring(0, 200);
+                        descElement.textContent = truncated + (textContent.length > 200 ? '...' : '');
+                    }
+                } else {
+                    // Show message when UpGuard feed is not available
+                    if (upguardBox) {
+                        console.warn('UpGuard feed not available in feed data');
+                        const titleElement = upguardBox.querySelector('.top-container-title');
+                        titleElement.textContent = 'UpGuard Breach Reports';
+                        
+                        const subtitleElement = upguardBox.querySelector('.top-container-subtitle');
+                        subtitleElement.textContent = 'Latest Data Breach Intelligence';
+                        
+                        const descElement = upguardBox.querySelector('.top-container-description');
+                        descElement.textContent = 'The UpGuard breach report feed is currently unavailable. Please check back later for the latest data breach intelligence.';
                     }
                 }
 
