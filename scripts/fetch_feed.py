@@ -103,6 +103,7 @@ def check_feed_validity(feed, context=''):
     # feedparser can often extract entries even from malformed XML
     if feed.entries:
         # Warn about bozo errors but still return True if we have entries
+        # Note: 'bozo' is feedparser's term for feeds with non-fatal XML errors
         bozo_msg = get_bozo_error_message(feed)
         if bozo_msg:
             print(f"  ⚠ Feed has parsing warnings{context}: {bozo_msg}")
