@@ -1,125 +1,40 @@
 {
-  "fetched_at": "2025-12-08T06:06:12.319305+00:00",
+  "fetched_at": "2025-12-08T18:06:09.638109+00:00",
   "feeds": [
     {
-      "id": "cisa-gov",
-      "source": "All CISA Advisories",
-      "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+      "id": "therecord",
+      "source": "The Record from Recorded Future News",
+      "url": "https://therecord.media/feed/",
       "items": [
         {
-          "title": "CISA Adds One Known Exploited Vulnerability to Catalog",
-          "link": "https://www.cisa.gov/news-events/alerts/2025/12/05/cisa-adds-one-known-exploited-vulnerability-catalog",
-          "published": "Fri, 05 Dec 25 12:00:00 +0000",
-          "summary": "CISA has added one new vulnerability to its Known Exploited Vulnerabilities (KEV) Catalog, based on evidence of active exploitation. CVE-2025-55182 Meta React Server Components Remote Code Execution Vulnerability This type of vulnerability is a frequent attack vector for malicious cyber actors and poses significant risks to the federal enterprise. Binding Operational Directive (BOD) 22-01: Reducing the Significant Risk of Known Exploited Vulnerabilities established the KEV Catalog as a living li"
+          "title": "Russian kids revolt as Kremlin bans Roblox, other popular apps",
+          "link": "https://therecord.media/russia-bans-roblox-drawing-criticism-from-kids",
+          "published": "Mon, 08 Dec 2025 17:02:22 GMT",
+          "summary": "The ban on Roblox has drawn a sharp backlash from the platform’s roughly 18 million monthly Russian users — mostly children and teenagers — who have launched social-media campaigns and video petitions urging officials to restore access."
         },
         {
-          "title": "Johnson Controls OpenBlue Mobile Web Application for OpenBlue Workplace",
-          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-25-338-03",
-          "published": "Thu, 04 Dec 25 12:00:00 +0000",
-          "summary": "View CSAF 1. EXECUTIVE SUMMARY CVSS v4 6.5 ATTENTION: Exploitable remotely/low attack complexity Vendor: Johnson Controls Inc. Equipment: OpenBlue Mobile Web Application for OpenBlue Workplace Vulnerability: Direct Request ('Forced Browsing') 2. RISK EVALUATION Successful exploitation of this vulnerability could allow an attacker to gain unauthorized access to sensitive information. 3. TECHNICAL DETAILS 3.1 AFFECTED PRODUCTS The following versions of Johnson Controls OpenBlue Mobile Web Applicat"
+          "title": "Researchers track dozens of organizations affected by React2Shell compromises tied to China’s MSS",
+          "link": "https://therecord.media/researchers-track-dozens-react2shell-vuln",
+          "published": "Mon, 08 Dec 2025 16:30:12 GMT",
+          "summary": "Researchers have confirmed more than 30 affected organizations tied to the React2Shell bug that emerged last week."
         },
         {
-          "title": "BRICKSTORM Backdoor",
-          "link": "https://www.cisa.gov/news-events/analysis-reports/ar25-338a",
-          "published": "Thu, 04 Dec 25 12:00:00 +0000",
-          "summary": "Malware Analysis at a Glance Executive Summary The Cybersecurity and Infrastructure Security Agency (CISA), National Security Agency (NSA), and Canadian Centre for Cyber Security (Cyber Centre) assess People’s Republic of China (PRC) state-sponsored cyber actors are using BRICKSTORM malware for long-term persistence on victim systems. CISA, NSA, and Cyber Centre are releasing this Malware Analysis Report to share indicators of compromise (IOCs) and detection signatures based off analysis of eigh"
+          "title": "Three hacking groups, two vulnerabilities and all eyes on China",
+          "link": "https://therecord.media/three-hacking-groups-two-vulnerabilities-china-microsoft",
+          "published": "Mon, 08 Dec 2025 14:51:22 GMT",
+          "summary": "What does it mean that three separate China-linked groups all moved on the same SharePoint vulnerabilities at nearly the same time?"
         },
         {
-          "title": "SolisCloud Monitoring Platform",
-          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-25-338-06",
-          "published": "Thu, 04 Dec 25 12:00:00 +0000",
-          "summary": "View CSAF 1. EXECUTIVE SUMMARY CVSS v4 8.3 ATTENTION: Exploitable remotely/low attack complexity Vendor: SolisCloud Equipment: Monitoring Platform (Cloud API & Device Control API) Vulnerability: Authorization Bypass Through User-Controlled Key 2. RISK EVALUATION Successful exploitation of this vulnerability could allow an attacker to access sensitive information by manipulating API requests. 3. TECHNICAL DETAILS 3.1 AFFECTED PRODUCTS The following versions of SolisCloud Monitoring Platform are a"
+          "title": "Russian police bust bank-account hacking gang that used NFCGate-based malware",
+          "link": "https://therecord.media/russian-police-bust-banking-hackers-nfcgate-based-malware",
+          "published": "Mon, 08 Dec 2025 13:56:16 GMT",
+          "summary": "Russian police said they took down a multimillion-dollar cybercrime operation that used malware based on a legitimate software tool to take over individuals' bank accounts."
         },
         {
-          "title": "Advantech iView",
-          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-25-338-07",
-          "published": "Thu, 04 Dec 25 12:00:00 +0000",
-          "summary": "View CSAF 1. EXECUTIVE SUMMARY CVSS v4 8.7 ATTENTION: Exploitable remotely/low attack complexity Vendor: Advantech Equipment: iView Vulnerability: SQL Injection 2. RISK EVALUATION Successful exploitation of this vulnerability could allow an attacker to disclose sensitive information, modify, or delete data. 3. TECHNICAL DETAILS 3.1 AFFECTED PRODUCTS The following Advantech products are affected: iView: 5.7.05.7057 3.2 VULNERABILITY OVERVIEW 3.2.1 Improper Neutralization of Special Elements used "
-        },
-        {
-          "title": "Johnson Controls iSTAR",
-          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-25-338-04",
-          "published": "Thu, 04 Dec 25 12:00:00 +0000",
-          "summary": "View CSAF 1. EXECUTIVE SUMMARY CVSS v4 7.1 ATTENTION: Low attack complexity Vendor: Johnson Controls Inc. Equipment: iSTAR eX, iSTAR Edge, iSTAR Ultra LT, iSTAR Ultra, iSTAR Ultra SE Vulnerability: Improper Validation of Certificate Expiration 2. RISK EVALUATION Successful exploitation of this vulnerability could result in the product failing to re-establish communication once the certificate expires. 3. TECHNICAL DETAILS 3.1 AFFECTED PRODUCTS The following versions of Johnson Controls iSTAR are"
-        },
-        {
-          "title": "Sunbird DCIM dcTrack and Power IQ",
-          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-25-338-05",
-          "published": "Thu, 04 Dec 25 12:00:00 +0000",
-          "summary": "View CSAF 1. EXECUTIVE SUMMARY CVSS v4 8.4 ATTENTION: Exploitable remotely/low attack complexity Vendor: Sunbird Equipment: DCIM dcTrack, Power IQ Vulnerabilities: Authentication Bypass Using an Alternate Path or Channel, Use of Hard-coded Credentials 2. RISK EVALUATION Successful exploitation of these vulnerabilities could allow an attacker to gain unauthorized access or steal credentials. 3. TECHNICAL DETAILS 3.1 AFFECTED PRODUCTS The following Sunbird products are affected: DCIM dcTrack: Vers"
-        },
-        {
-          "title": "CISA Releases Nine Industrial Control Systems Advisories",
-          "link": "https://www.cisa.gov/news-events/alerts/2025/12/04/cisa-releases-nine-industrial-control-systems-advisories",
-          "published": "Thu, 04 Dec 25 12:00:00 +0000",
-          "summary": "CISA released nine Industrial Control Systems (ICS) Advisories. These advisories provide timely information about current security issues, vulnerabilities, and exploits surrounding ICS. ICSA-25-338-01 Mitsubishi Electric GX Works2 ICSA-25-338-02 MAXHUB Pivot ICSA-25-338-03 Johnson Controls OpenBlue Mobile Web Application for OpenBlue Workplace ICSA-25-338-04 Johnson Controls iSTAR ICSA-25-338-05 Sunbird DCIM dcTrack and Power IQ ICSA-25-338-06 SolisCloud Monitoring Platform ICSA-25-338-07 Advant"
-        },
-        {
-          "title": "MAXHUB Pivot",
-          "link": "https://www.cisa.gov/news-events/ics-advisories/icsa-25-338-02",
-          "published": "Thu, 04 Dec 25 12:00:00 +0000",
-          "summary": "View CSAF 1. EXECUTIVE SUMMARY CVSS v4 8.7 ATTENTION: Exploitable remotely/low attack complexity Vendor: MAXHUB Equipment: MAXHUB Pivot Vulnerability: Weak Password Recovery Mechanism for Forgotten Password 2. RISK EVALUATION Successful exploitation of this vulnerability could allow an attacker to request a password reset and gain unauthorized access to the account. 3. TECHNICAL DETAILS 3.1 AFFECTED PRODUCTS MAXHUB reports the following versions of MAXHUB Pivot are affected: Pivot client applica"
-        }
-      ]
-    },
-    {
-      "id": "upguard",
-      "source": "UpGuard Data Breach Research",
-      "url": "https://www.upguard.com/breaches/rss.xml",
-      "items": [
-        {
-          "title": "Identifying Companies Affected by the Shai-Hulud NPM Supply Chain Attack | UpGuard",
-          "link": "https://upguard-staging.webflow.io/breaches/identifying-companies-affected-by-the-shai-hulud-npm-supply-chain-attack",
-          "published": "Fri, 24 Oct 2025 04:08:27 GMT",
-          "summary": "Using Github event archives, UpGuard Research identifies companies with indicators of compromise of the Shai-Hulud attacks, even after the repos have been deleted."
-        },
-        {
-          "title": "Unclaimed Property: How an Unknown Entity Exposed Indian Banking Information | UpGuard",
-          "link": "https://upguard-staging.webflow.io/breaches/india-bank-transfers-data-leak",
-          "published": "Fri, 26 Sep 2025 16:05:20 GMT",
-          "summary": "UpGuard discovered a rapidly growing data leak of bank accounts in India– and no one to take responsibility for it."
-        },
-        {
-          "title": "Traffic Patterns: The Leakzone Part 2 | UpGuard",
-          "link": "https://upguard-staging.webflow.io/breaches/traffic-patterns-the-leakzone-part-2",
-          "published": "Tue, 12 Aug 2025 23:13:57 GMT",
-          "summary": "UpGuard analyzes the universities, governments, and private companies mentioned in the access logs of hacker forum Leakzone."
-        },
-        {
-          "title": "Insufficient Coverage: WorkCycle, Langflow, and TPL | UpGuard",
-          "link": "https://upguard-staging.webflow.io/breaches/workcycle-tpl-langflow-leak-pakistan",
-          "published": "Tue, 12 Aug 2025 16:00:01 GMT",
-          "summary": "UpGuard can now report that we have secured a Langflow instance leaking data for around 97,000 insurance customers in Pakistan."
-        },
-        {
-          "title": "The AggregateIQ Files, Part Four: Northwest Passage | UpGuard",
-          "link": "https://upguard-staging.webflow.io/breaches/aggregate-iq-part-four-canada",
-          "published": "Tue, 05 Aug 2025 01:32:13 GMT",
-          "summary": "Learn more about how a data exposure from within Cambridge Analytica-linked firm AggregateIQ reveals web assets built for Canadian politicians and parties."
-        },
-        {
-          "title": "Aptly Named: How the Leakzone Exposed Access Logs | UpGuard",
-          "link": "https://upguard-staging.webflow.io/breaches/leakzone-net",
-          "published": "Sat, 26 Jul 2025 03:27:49 GMT",
-          "summary": "UpGuard discovered an unauthenticated Elasticsearch database containing 22 million records of user traffic for hacking forum leakzone.net."
-        },
-        {
-          "title": "Black Box, Red Disk: How Top Secret NSA and Army Data Leaked Online | UpGuard",
-          "link": "https://upguard-staging.webflow.io/breaches/cloud-leak-inscom",
-          "published": "Sat, 26 Jul 2025 03:27:49 GMT",
-          "summary": "A sensitive S3 bucket left wide open, containing highly classified 'NOFORN' data, was discovered by the UpGuard team."
-        },
-        {
-          "title": "Household Names: How Tetrad Exposed Data on 120 Million Consumers | UpGuard",
-          "link": "https://upguard-staging.webflow.io/breaches/tetrad-breach-120-million-households",
-          "published": "Sat, 26 Jul 2025 03:27:49 GMT",
-          "summary": "A collection of data sets detailing the purchasing habits and consumer behavior profiles of 120 million American households was exposed by Tetrad."
-        },
-        {
-          "title": "Clinical Trials: How Personal Information for Thousands of Australians was Exposed | UpGuard",
-          "link": "https://upguard-staging.webflow.io/breaches/data-leak-neoclinical-australia-new-zealand",
-          "published": "Sat, 26 Jul 2025 03:27:49 GMT",
-          "summary": "A company that matches individuals with clinical trials in Australia and New Zealand exposed personal information on over 37,000 people via a misconfigured MongoDB."
+          "title": "UK intelligence warns AI 'prompt injection' attacks might never go away",
+          "link": "https://therecord.media/prompt-injection-attacks-uk-intelligence-warning",
+          "published": "Mon, 08 Dec 2025 13:06:07 GMT",
+          "summary": "A top technologist at the U.K.’s National Cyber Security Centre said “there’s a good chance” that prompt injection attacks against AI will never be eliminated, and he warned of the related risks of embedding generative AI into digital systems globally."
         }
       ]
     }
