@@ -61,6 +61,8 @@ def generate_feed_id(url):
         return 'feeder-co'
     elif domain == 'thecyberwire.com' or domain.endswith('.thecyberwire.com'):
         return 'cyberwire'
+    elif domain == 'upguard.com' or domain.endswith('.upguard.com'):
+        return 'upguard'
     else:
         # Generic ID from domain and path
         base_id = domain.split('.')[0] if '.' in domain else domain
@@ -192,6 +194,8 @@ def extract_feed_info(feed, original_url):
                 feed_title = 'Feeder Discovery Feed'
             elif domain == 'thecyberwire.com' or domain.endswith('.thecyberwire.com'):
                 feed_title = 'The CyberWire'
+            elif domain == 'upguard.com' or domain.endswith('.upguard.com'):
+                feed_title = 'UpGuard Breach Reports'
             else:
                 feed_title = parsed.netloc.replace('www.', '').split('.')[0].upper()
     else:
