@@ -1,15 +1,14 @@
-# Signal - Multi-Feed Cybersecurity Aggregator
+# Signal - Cybersecurity News Aggregator
 
-A dark-themed GitHub Pages site that displays cybersecurity advisories and threat intelligence from multiple RSS/Atom feeds in a clean, responsive grid layout.
+A dark-themed GitHub Pages site that displays cybersecurity news from The Record Media RSS feed in a clean, responsive grid layout.
 
 ## Features
 
 - **Dark Theme**: Clean black background with contrasting white text
-- **Multiple Feeds**: Aggregates content from multiple sources, each displayed in its own section
+- **RSS Feed Integration**: Displays the 9 most recent articles from The Record Media
 - **Responsive Grid Layout**: 3-column grid on desktop, adapts to 2 columns on tablets and 1 column on mobile
-- **Auto-Updates**: Feeds are automatically fetched and updated twice daily (6 AM and 6 PM UTC)
+- **Auto-Updates**: Feed is automatically fetched and updated twice daily (6 AM and 6 PM UTC)
 - **Navigation Bar**: Simple navigation with title on the left and section links on the right
-- **RSS Integration**: Displays the 9 most recent items from https://feeder.co/discover/18fedcbe1e/cisa-gov (CISA cybersecurity advisories via Feeder)
 
 ## Setup
 
@@ -22,7 +21,7 @@ A dark-themed GitHub Pages site that displays cybersecurity advisories and threa
 2. The GitHub Action will automatically run:
    - Twice daily at 6 AM and 6 PM UTC
    - Can be manually triggered from the Actions tab
-   - Fetches feed data using scripts/fetch_feed.py and generates feed-data.json
+   - Fetches feed data from The Record Media using scripts/fetch_feed.py and generates feed-data.json
 
 ## Technology Stack
 
@@ -44,9 +43,9 @@ A dark-themed GitHub Pages site that displays cybersecurity advisories and threa
    pip install feedparser requests beautifulsoup4
    
    # Run the script
-   python3 scripts/fetch_feed.py "https://www.cisa.gov/cybersecurity-advisories/all.xml,https://feeder.co/discover/18fedcbe1e/cisa-gov"
+   python3 scripts/fetch_feed.py "https://therecord.media/feed/"
    
    # Or use environment variable
-   FEED_URLS="https://example.com/feed1.xml,https://example.com/feed2.rss" python3 scripts/fetch_feed.py
+   FEED_URLS="https://therecord.media/feed/" python3 scripts/fetch_feed.py
    ```
 3. Inspect the generated `feed-data.json` file to verify the output

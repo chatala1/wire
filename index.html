@@ -182,94 +182,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Top Row Containers */
-        .top-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .top-container {
-            background-color: #0a0a0a;
-            border: 1px solid #333333;
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .top-container:hover {
-            transform: translateY(-4px);
-            border-color: #22c55e;
-        }
-
-        .top-container-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: #ffffff;
-        }
-
-        .top-container-subtitle {
-            font-size: 0.95rem;
-            color: #888888;
-            margin-bottom: 1rem;
-        }
-
-        .top-container-description {
-            font-size: 0.95rem;
-            color: #cccccc;
-            line-height: 1.6;
-        }
-
-        /* Threat Level LED Indicator */
-        .threat-level-indicator {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .led-indicator {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-            flex-shrink: 0;
-        }
-
-        .led-low {
-            background-color: #73ae57;
-            box-shadow: 0 0 15px rgba(115, 174, 87, 0.7);
-        }
-
-        .led-guarded {
-            background-color: #00a8e1;
-            box-shadow: 0 0 15px rgba(0, 168, 225, 0.7);
-        }
-
-        .led-elevated {
-            background-color: #ecde29;
-            box-shadow: 0 0 15px rgba(236, 222, 41, 0.7);
-        }
-
-        .led-high {
-            background-color: #f37043;
-            box-shadow: 0 0 15px rgba(243, 112, 67, 0.7);
-        }
-
-        .led-severe {
-            background-color: #cc092f;
-            box-shadow: 0 0 15px rgba(204, 9, 47, 0.7);
-        }
-
-        .threat-level-text {
-            font-size: 0.9rem;
-            color: #888888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
         /* Footer */
         footer {
             background-color: rgba(0,0,0,0.90);
@@ -303,18 +215,10 @@
             .feed-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-            .top-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
 
         @media (max-width: 640px) {
             .feed-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .top-row {
                 grid-template-columns: 1fr;
             }
 
@@ -344,24 +248,6 @@
     </nav>
 
     <div class="container">
-        <div class="top-row">
-            <div class="top-container" id="threat-level-box">
-                <div class="top-container-title">Threat Level</div>
-                <div class="top-container-subtitle">Loading...</div>
-                <div class="top-container-description">Current threat level information is being retrieved...</div>
-            </div>
-            <div class="top-container" id="cyberwire-box">
-                <div class="top-container-title">Title Placeholder</div>
-                <div class="top-container-subtitle">Subtitle Placeholder</div>
-                <div class="top-container-description">Description placeholder text goes here. This section can contain additional information about the content or feature.</div>
-            </div>
-            <div class="top-container" id="upguard-box">
-                <div class="top-container-title">Title Placeholder</div>
-                <div class="top-container-subtitle">Subtitle Placeholder</div>
-                <div class="top-container-description">Description placeholder text goes here. This section can contain additional information about the content or feature.</div>
-            </div>
-        </div>
-
         <section id="feed">
             <div id="feed-container">
                 <div class="loading loading-message">Loading feed...</div>
@@ -389,7 +275,7 @@
 
                 const data = await response.json();
                 
-                // Handle new multi-feed structure
+                // Handle feed structure
                 const feeds = data.feeds || [];
                 
                 // Backward compatibility: if old format (data.items), convert to new format
@@ -406,303 +292,22 @@
                     return;
                 }
 
-                // Populate CyberWire box (2nd box in top row)
-                const cyberWireFeed = feeds.find(feed => feed.id === 'cyberwire');
-                const cyberWireBox = document.getElementById('cyberwire-box');
-                
-                if (cyberWireFeed && cyberWireFeed.items && cyberWireFeed.items.length > 0) {
-                    const latestItem = cyberWireFeed.items[0];
-                    
-                    if (cyberWireBox && latestItem.link) {
-                        // Create clickable title link
-                        const titleElement = cyberWireBox.querySelector('.top-container-title');
-                        titleElement.innerHTML = '';
-                        const titleLink = document.createElement('a');
-                        titleLink.href = latestItem.link;
-                        titleLink.target = '_blank';
-                        titleLink.rel = 'noopener noreferrer';
-                        // Clean title by removing common prefixes
-                        let cleanTitle = latestItem.title || 'Untitled';
-                        cleanTitle = cleanTitle.replace(/^(Latest CyberWire News:\s*|CyberWire:\s*|The CyberWire:\s*)/i, '');
-                        titleLink.textContent = cleanTitle;
-                        titleLink.style.color = '#ffffff';
-                        titleLink.style.textDecoration = 'none';
-                        titleLink.style.transition = 'color 0.3s';
-                        titleLink.onmouseover = function() { this.style.color = '#22c55e'; };
-                        titleLink.onmouseout = function() { this.style.color = '#ffffff'; };
-                        titleElement.appendChild(titleLink);
-                        
-                        // Set subtitle with date
-                        const subtitleElement = cyberWireBox.querySelector('.top-container-subtitle');
-                        let dateString = 'The CyberWire';
-                        const dateValue = latestItem.published || latestItem.pubDate;
-                        if (dateValue) {
-                            try {
-                                const pubDate = new Date(dateValue);
-                                if (!isNaN(pubDate.getTime())) {
-                                    dateString = `The CyberWire - ${pubDate.toLocaleDateString('en-US', { 
-                                        month: 'short', 
-                                        day: 'numeric', 
-                                        year: 'numeric'
-                                    })}`;
-                                }
-                            } catch (e) {
-                                console.warn('Failed to parse date for CyberWire:', e);
-                            }
-                        }
-                        subtitleElement.textContent = dateString;
-                        
-                        // Set description with truncated summary
-                        const descElement = cyberWireBox.querySelector('.top-container-description');
-                        let textContent = '';
-                        const descValue = latestItem.summary || latestItem.description;
-                        if (descValue) {
-                            try {
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(descValue, 'text/html');
-                                textContent = doc.body.textContent || doc.body.innerText || '';
-                            } catch (e) {
-                                textContent = descValue;
-                            }
-                        }
-                        textContent = textContent.trim();
-                        const truncated = textContent.substring(0, 200);
-                        descElement.textContent = truncated + (textContent.length > 200 ? '...' : '');
-                    }
-                } else {
-                    // Show message when CyberWire feed is not available
-                    if (cyberWireBox) {
-                        console.warn('CyberWire feed not available in feed data');
-                        const titleElement = cyberWireBox.querySelector('.top-container-title');
-                        titleElement.textContent = 'The CyberWire';
-                        
-                        const subtitleElement = cyberWireBox.querySelector('.top-container-subtitle');
-                        subtitleElement.textContent = 'Daily Cybersecurity News Briefing';
-                        
-                        const descElement = cyberWireBox.querySelector('.top-container-description');
-                        descElement.textContent = 'The CyberWire feed is currently unavailable. Please check back later for the latest cybersecurity news and analysis.';
-                    }
-                }
-
-                // Populate UpGuard box (3rd box in top row)
-                const upguardFeed = feeds.find(feed => feed.id === 'upguard');
-                const upguardBox = document.getElementById('upguard-box');
-                
-                if (upguardFeed && upguardFeed.items && upguardFeed.items.length > 0) {
-                    const latestItem = upguardFeed.items[0];
-                    
-                    if (upguardBox && latestItem.link) {
-                        // Create clickable title link
-                        const titleElement = upguardBox.querySelector('.top-container-title');
-                        titleElement.innerHTML = '';
-                        const titleLink = document.createElement('a');
-                        titleLink.href = latestItem.link;
-                        titleLink.target = '_blank';
-                        titleLink.rel = 'noopener noreferrer';
-                        // Clean title
-                        let cleanTitle = latestItem.title || 'Untitled';
-                        titleLink.textContent = cleanTitle;
-                        titleLink.style.color = '#ffffff';
-                        titleLink.style.textDecoration = 'none';
-                        titleLink.style.transition = 'color 0.3s';
-                        titleLink.onmouseover = function() { this.style.color = '#22c55e'; };
-                        titleLink.onmouseout = function() { this.style.color = '#ffffff'; };
-                        titleElement.appendChild(titleLink);
-                        
-                        // Set subtitle with date
-                        const subtitleElement = upguardBox.querySelector('.top-container-subtitle');
-                        let dateString = 'UpGuard Breach Report';
-                        const dateValue = latestItem.published || latestItem.pubDate;
-                        if (dateValue) {
-                            try {
-                                const pubDate = new Date(dateValue);
-                                if (!isNaN(pubDate.getTime())) {
-                                    dateString = `UpGuard - ${pubDate.toLocaleDateString('en-US', { 
-                                        month: 'short', 
-                                        day: 'numeric', 
-                                        year: 'numeric'
-                                    })}`;
-                                }
-                            } catch (e) {
-                                console.warn('Failed to parse date for UpGuard:', e);
-                            }
-                        }
-                        subtitleElement.textContent = dateString;
-                        
-                        // Set description with truncated summary
-                        const descElement = upguardBox.querySelector('.top-container-description');
-                        let textContent = '';
-                        const descValue = latestItem.summary || latestItem.description;
-                        if (descValue) {
-                            try {
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(descValue, 'text/html');
-                                textContent = doc.body.textContent || doc.body.innerText || '';
-                            } catch (e) {
-                                textContent = descValue;
-                            }
-                        }
-                        textContent = textContent.trim();
-                        const truncated = textContent.substring(0, 200);
-                        descElement.textContent = truncated + (textContent.length > 200 ? '...' : '');
-                    }
-                } else {
-                    // Show message when UpGuard feed is not available
-                    if (upguardBox) {
-                        console.warn('UpGuard feed not available in feed data');
-                        const titleElement = upguardBox.querySelector('.top-container-title');
-                        titleElement.textContent = 'UpGuard Breach Reports';
-                        
-                        const subtitleElement = upguardBox.querySelector('.top-container-subtitle');
-                        subtitleElement.textContent = 'Latest Data Breach Intelligence';
-                        
-                        const descElement = upguardBox.querySelector('.top-container-description');
-                        descElement.textContent = 'The UpGuard breach report feed is currently unavailable. Please check back later for the latest data breach intelligence.';
-                    }
-                }
-
-                // Populate Threat Level box (1st box in top row)
-                const cisFeed = feeds.find(feed => feed.id === 'cis-security');
-                const threatLevelBox = document.getElementById('threat-level-box');
-                
-                if (cisFeed && cisFeed.items && cisFeed.items.length > 0) {
-                    const latestItem = cisFeed.items[0];
-                    
-                    if (threatLevelBox) {
-                        // Helper function to detect threat level from text
-                        const detectThreatLevel = (text) => {
-                            const upperText = (text || '').toUpperCase();
-                            if (/\bSEVERE\b/.test(upperText) || /\bRED\b/.test(upperText)) {
-                                return { level: 'SEVERE', ledClass: 'led-severe' };
-                            } else if (/\bHIGH\b/.test(upperText) || /\bORANGE\b/.test(upperText)) {
-                                return { level: 'HIGH', ledClass: 'led-high' };
-                            } else if (/\bELEVATED\b/.test(upperText) || /\bYELLOW\b/.test(upperText)) {
-                                return { level: 'ELEVATED', ledClass: 'led-elevated' };
-                            } else if (/\bGUARDED\b/.test(upperText) || /\bBLUE\b/.test(upperText)) {
-                                return { level: 'GUARDED', ledClass: 'led-guarded' };
-                            } else if (/\bLOW\b/.test(upperText) || /\bGREEN\b/.test(upperText)) {
-                                return { level: 'LOW', ledClass: 'led-low' };
-                            }
-                            return null;
-                        };
-                        
-                        // Check title first, then summary for threat level
-                        let result = detectThreatLevel(latestItem.title);
-                        if (!result) {
-                            result = detectThreatLevel(latestItem.summary);
-                        }
-                        
-                        const threatLevel = result ? result.level : 'UNKNOWN';
-                        const ledClass = result ? result.ledClass : '';
-                        
-                        // Update title
-                        const titleElement = threatLevelBox.querySelector('.top-container-title');
-                        titleElement.textContent = `Current Threat Level: ${threatLevel}`;
-                        
-                        // Create LED indicator and subtitle
-                        const subtitleElement = threatLevelBox.querySelector('.top-container-subtitle');
-                        subtitleElement.innerHTML = '';
-                        
-                        const indicatorDiv = document.createElement('div');
-                        indicatorDiv.className = 'threat-level-indicator';
-                        
-                        const led = document.createElement('div');
-                        led.className = `led-indicator ${ledClass}`;
-                        
-                        const levelText = document.createElement('span');
-                        levelText.className = 'threat-level-text';
-                        
-                        // Format date
-                        let dateString = 'CIS Security';
-                        const dateValue = latestItem.published || latestItem.pubDate;
-                        if (dateValue) {
-                            try {
-                                const pubDate = new Date(dateValue);
-                                if (!isNaN(pubDate.getTime())) {
-                                    dateString = `CIS Security - ${pubDate.toLocaleDateString('en-US', { 
-                                        month: 'short', 
-                                        day: 'numeric', 
-                                        year: 'numeric'
-                                    })}`;
-                                }
-                            } catch (e) {
-                                console.warn('Failed to parse date for CIS Security:', e);
-                            }
-                        }
-                        levelText.textContent = dateString;
-                        
-                        indicatorDiv.appendChild(led);
-                        indicatorDiv.appendChild(levelText);
-                        subtitleElement.appendChild(indicatorDiv);
-                        
-                        // Set description with truncated summary
-                        const descElement = threatLevelBox.querySelector('.top-container-description');
-                        let textContent = '';
-                        const descValue = latestItem.summary || latestItem.description;
-                        if (descValue) {
-                            try {
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(descValue, 'text/html');
-                                textContent = doc.body.textContent || doc.body.innerText || '';
-                            } catch (e) {
-                                textContent = descValue;
-                            }
-                        }
-                        textContent = textContent.trim();
-                        const truncated = textContent.substring(0, 200);
-                        descElement.textContent = truncated + (textContent.length > 200 ? '...' : '');
-                        
-                        // Make the entire box clickable if there's a link
-                        if (latestItem.link) {
-                            threatLevelBox.style.cursor = 'pointer';
-                            threatLevelBox.onclick = function() {
-                                window.open(latestItem.link, '_blank', 'noopener,noreferrer');
-                            };
-                        }
-                    }
-                } else {
-                    // Show message when CIS Security feed is not available
-                    if (threatLevelBox) {
-                        console.warn('CIS Security feed not available in feed data');
-                        const titleElement = threatLevelBox.querySelector('.top-container-title');
-                        titleElement.textContent = 'Current Threat Level';
-                        
-                        const subtitleElement = threatLevelBox.querySelector('.top-container-subtitle');
-                        subtitleElement.textContent = 'CIS Security';
-                        
-                        const descElement = threatLevelBox.querySelector('.top-container-description');
-                        descElement.textContent = 'The CIS Security threat level feed is currently unavailable. Please check back later for the latest threat information.';
-                    }
-                }
-
                 // Clear container
                 feedContainer.innerHTML = '';
 
-                // Render each feed as a separate section
-                feeds.forEach((feed, feedIndex) => {
-                    if (!feed.items || feed.items.length === 0) {
-                        console.warn(`Feed ${feedIndex} has no items, skipping`);
-                        return;
-                    }
+                // Get The Record feed (should be the only one)
+                const recordFeed = feeds[0];
+                
+                if (!recordFeed || !recordFeed.items || recordFeed.items.length === 0) {
+                    feedContainer.innerHTML = '<div class="error">No feed items available</div>';
+                    return;
+                }
 
-                    // Create feed section with title
-                    const feedSection = document.createElement('div');
-                    feedSection.className = 'feed-section';
-                    feedSection.style.marginBottom = '3rem';
+                // Create grid with widgets for The Record feed (9 items)
+                const grid = document.createElement('div');
+                grid.className = 'feed-grid';
 
-                    const feedTitle = document.createElement('h2');
-                    feedTitle.textContent = feed.source || 'Feed';
-                    feedTitle.style.fontSize = '12px';
-                    feedTitle.style.marginBottom = '2rem';
-                    feedTitle.style.paddingBottom = '0.5rem';
-                    feedTitle.style.borderBottom = '2px solid #333333';
-                    feedSection.appendChild(feedTitle);
-
-                    // Create grid with widgets for this feed
-                    const grid = document.createElement('div');
-                    grid.className = 'feed-grid';
-
-                    feed.items.slice(0, 9).forEach((item, index) => {
+                recordFeed.items.slice(0, 9).forEach((item, index) => {
                         // Validate item has required fields
                         if (!item || !item.link) {
                             console.warn(`Feed ${feedIndex}, item ${index}: missing required fields`);
@@ -779,16 +384,14 @@
                         link.rel = 'noopener noreferrer';
                         link.textContent = 'Read more →';
 
-                        widget.appendChild(title);
-                        widget.appendChild(meta);
-                        widget.appendChild(description);
-                        widget.appendChild(link);
-                        grid.appendChild(widget);
-                    });
-
-                    feedSection.appendChild(grid);
-                    feedContainer.appendChild(feedSection);
+                    widget.appendChild(title);
+                    widget.appendChild(meta);
+                    widget.appendChild(description);
+                    widget.appendChild(link);
+                    grid.appendChild(widget);
                 });
+
+                feedContainer.appendChild(grid);
 
                 // Update last updated time
                 if (data.fetched_at || data.lastUpdated) {
