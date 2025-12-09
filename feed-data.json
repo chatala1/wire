@@ -1,11 +1,23 @@
 {
-  "fetched_at": "2025-12-09T06:05:47.847574+00:00",
+  "fetched_at": "2025-12-09T18:04:59.710205+00:00",
   "feeds": [
     {
       "id": "therecord",
       "source": "The Record from Recorded Future News",
       "url": "https://therecord.media/feed/",
       "items": [
+        {
+          "title": "Khashoggi widow files complaint in France alleging Saudi government infected devices with spyware",
+          "link": "https://therecord.media/khashoggi-widow-legal-complaint-filed-alleging-saudi-government-spyware",
+          "published": "Tue, 09 Dec 2025 16:44:48 GMT",
+          "summary": "A French judge will determine whether investigators should proceed with a complaint from the widow of slain writer Jamal Khashoggi alleging that Saudi Arabia deployed spyware on her devices before his killing."
+        },
+        {
+          "title": "Seoul cyber investigators seize data, devices from ‘South Korea’s Amazon’ following data breach",
+          "link": "https://therecord.media/seoul-cyber-investigators-seize-data-korea-tech-giant",
+          "published": "Tue, 09 Dec 2025 14:51:43 GMT",
+          "summary": "Cyber investigators from the Seoul Metropolitan Police Agency seized devices and data from one of the country's largest tech firms to find evidence uncovering how the breach took place."
+        },
         {
           "title": "Trump plans executive order curbing state AI laws",
           "link": "https://therecord.media/trump-plans-ai-exec-order-curbing-state-laws",
@@ -16,7 +28,7 @@
           "title": "More than $2 billion in payments from 4,000 ransomware incidents reported to Treasury in recent years",
           "link": "https://therecord.media/fincen-treasury-2-billion-ransomware-payments-report",
           "published": "Mon, 08 Dec 2025 21:15:53 GMT",
-          "summary": "The Treasury Department’s Financial Crimes Enforcement Network (FinCEN) released a study last week covering 4,194 ransomware incidents that were reported through the Bank Secrecy Act over the three-year period."
+          "summary": "The Financial Crimes Enforcement Network (FinCEN) released a study covering 4,194 ransomware incidents that were reported through the Bank Secrecy Act over the three-year period."
         },
         {
           "title": "Meta proposal for less data sharing is approved by European Commission",
