@@ -195,7 +195,7 @@ def extract_feed_info(feed, original_url):
         feed_title = 'Unknown Feed'
     
     items = []
-    for entry in feed.entries[:9]:  # Limit to 9 items
+    for entry in feed.entries:  # Process all entries, not just 9
         try:
             # Extract title
             title = entry.get('title', 'Untitled')
@@ -243,6 +243,53 @@ def extract_feed_info(feed, original_url):
     }
 
 
+def merge_feed_items(new_items, old_items, max_items=9):
+    """
+    Merge new items with old items to ensure we always have max_items.
+    
+    Deduplication is based on the 'link' field. Items are ordered with new items
+    first, followed by old items that don't appear in the new items list.
+    
+    Args:
+        new_items: List of newly fetched items
+        old_items: List of previously stored items
+        max_items: Maximum number of items to keep (default 9)
+    
+    Returns:
+        List of items with new items first, followed by old items (deduplicated by link)
+    """
+    # Create a set of links from new items for deduplication
+    new_links = {item['link'] for item in new_items}
+    
+    # Start with new items
+    merged = list(new_items)
+    
+    # Add old items that are not in new items, up to max_items
+    for old_item in old_items:
+        if len(merged) >= max_items:
+            break
+        if old_item['link'] not in new_links:
+            merged.append(old_item)
+    
+    # Return only up to max_items
+    return merged[:max_items]
+
+
+def load_existing_feed_data(output_path):
+    """Load existing feed data if it exists."""
+    try:
+        if os.path.exists(output_path):
+            with open(output_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+    except FileNotFoundError:
+        print(f"  Note: No existing feed data found at {output_path}")
+    except json.JSONDecodeError as e:
+        print(f"  Warning: Failed to parse existing feed data (invalid JSON): {e}")
+    except Exception as e:
+        print(f"  Warning: Could not load existing feed data: {e}")
+    return None
+
+
 def main():
     """Main function to fetch feeds and generate JSON."""
     # Get feed URLs from command line or environment
@@ -268,6 +315,16 @@ def main():
     
     print(f"Processing {len(feed_urls)} feed(s)...")
     
+    # Load existing feed data
+    output_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'feed-data.json')
+    existing_data = load_existing_feed_data(output_path)
+    
+    # Create a map of existing feeds by ID for easy lookup
+    existing_feeds_map = {}
+    if existing_data and 'feeds' in existing_data:
+        for feed in existing_data['feeds']:
+            existing_feeds_map[feed['id']] = feed
+    
     # Create session for requests
     session = requests.Session()
     session.headers.update({
@@ -287,13 +344,22 @@ def main():
             feed_info = extract_feed_info(feed, url)
             feed_id = generate_feed_id(url)
             
+            # Get old items if they exist
+            old_items = []
+            if feed_id in existing_feeds_map:
+                old_items = existing_feeds_map[feed_id].get('items', [])
+            
+            # Merge new items with old items to ensure we have at least 9 items
+            merged_items = merge_feed_items(feed_info['items'], old_items, max_items=9)
+            
             feeds_data.append({
                 'id': feed_id,
                 'source': feed_info['source'],
                 'url': final_url or url,
-                'items': feed_info['items']
+                'items': merged_items
             })
-            print(f"  ✓ Extracted {len(feed_info['items'])} items from {feed_info['source']}")
+            print(f"  ✓ Extracted {len(feed_info['items'])} new items from {feed_info['source']}")
+            print(f"  ✓ Merged to {len(merged_items)} total items (target: 9)")
         else:
             print(f"  ✗ Failed to fetch or parse feed: {url}")
     
@@ -311,8 +377,6 @@ def main():
     }
     
     # Write to feed-data.json in repository root
-    output_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'feed-data.json')
-    
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
     
