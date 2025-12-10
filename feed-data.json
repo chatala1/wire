@@ -1,11 +1,41 @@
 {
-  "fetched_at": "2025-12-10T06:05:56.008628+00:00",
+  "fetched_at": "2025-12-10T18:06:15.089091+00:00",
   "feeds": [
     {
       "id": "therecord",
       "source": "The Record from Recorded Future News",
       "url": "https://therecord.media/feed/",
       "items": [
+        {
+          "title": "US extradites member of Russian hacktivist group involved in critical infrastructure attacks",
+          "link": "https://therecord.media/us-extradites-member-of-russian-hacking-groups-critical-infrastructure",
+          "published": "Wed, 10 Dec 2025 17:49:32 GMT",
+          "summary": "The Justice Department unveiled two indictments on Tuesday evening charging Victoria Eduardovna Dubranova for her role in CyberArmyofRussia_Reborn (CARR) and NoName057(16), two groups known for attacking critical infrastructure."
+        },
+        {
+          "title": "Teen who allegedly stole millions of personal data records arrested in Spain",
+          "link": "https://therecord.media/spain-arrests-teen-suspect-data-theft-and-sale",
+          "published": "Wed, 10 Dec 2025 15:26:32 GMT",
+          "summary": "Spanish police accused a 19-year-old man of stealing 64 million personal data records from multiple companies and attempting to sell them on hacker forums."
+        },
+        {
+          "title": "Russia’s flagship airline hacked through little-known tech vendor, according to new report",
+          "link": "https://therecord.media/russia-flagship-airline-hacked-through-little-known-vendor",
+          "published": "Wed, 10 Dec 2025 15:13:28 GMT",
+          "summary": "The breach, which was claimed by the pro-Ukrainian hacker collective Silent Crow and the allied Belarusian Cyber-Partisans, paralyzed Aeroflot’s operations, grounding more than a hundred flights."
+        },
+        {
+          "title": "Senators return to effort to boost cybersecurity for commercial satellite industry",
+          "link": "https://therecord.media/commercial-satellite-industry-cybersecurity-cornyn-peters-bill-returns",
+          "published": "Wed, 10 Dec 2025 13:53:50 GMT",
+          "summary": "Sens. John Cornyn and Gary Peters are taking another crack at moving legislation meant to help commercial satellite providers defend their networks."
+        },
+        {
+          "title": "British government sanctions Russian and Chinese groups over information warfare",
+          "link": "https://therecord.media/uk-sanctions-russia-china-entities-information-warfare",
+          "published": "Wed, 10 Dec 2025 12:54:16 GMT",
+          "summary": "The U.K.'s foreign secretary announced sanctions on seven Russian individuals and influence networks, as well as the Chinese companies i-Soon and Integrity Technology Group."
+        },
         {
           "title": "California man pleads guilty to RICO charges as DOJ indicts crypto theft gang",
           "link": "https://therecord.media/california-man-pleads-guilty-rico-charges-crypto-theft",
@@ -29,30 +59,6 @@
           "link": "https://therecord.media/trump-plans-ai-exec-order-curbing-state-laws",
           "published": "Mon, 08 Dec 2025 21:25:47 GMT",
           "summary": "Legislators at both the state and federal level have increasingly scrutinized how AI models suck up data for training purposes."
-        },
-        {
-          "title": "More than $2 billion in payments from 4,000 ransomware incidents reported to Treasury in recent years",
-          "link": "https://therecord.media/fincen-treasury-2-billion-ransomware-payments-report",
-          "published": "Mon, 08 Dec 2025 21:15:53 GMT",
-          "summary": "The Financial Crimes Enforcement Network (FinCEN) released a study covering 4,194 ransomware incidents that were reported through the Bank Secrecy Act over the three-year period."
-        },
-        {
-          "title": "Meta proposal for less data sharing is approved by European Commission",
-          "link": "https://therecord.media/meta-less-data-sharing-european-commission",
-          "published": "Mon, 08 Dec 2025 20:01:45 GMT",
-          "summary": "Instagram and Facebook users in the EU will now have the option to share less personal data and see fewer personalized ads."
-        },
-        {
-          "title": "Russian kids revolt as Kremlin bans Roblox, other popular apps",
-          "link": "https://therecord.media/russia-bans-roblox-drawing-criticism-from-kids",
-          "published": "Mon, 08 Dec 2025 17:02:22 GMT",
-          "summary": "The ban on Roblox has drawn a sharp backlash from the platform’s roughly 18 million monthly Russian users — mostly children and teenagers — who have launched social-media campaigns and video petitions urging officials to restore access."
-        },
-        {
-          "title": "Researchers track dozens of organizations affected by React2Shell compromises tied to China’s MSS",
-          "link": "https://therecord.media/researchers-track-dozens-react2shell-vuln",
-          "published": "Mon, 08 Dec 2025 16:30:12 GMT",
-          "summary": "Researchers have confirmed more than 30 affected organizations tied to the React2Shell bug that emerged last week."
         }
       ]
     }
