@@ -1,11 +1,23 @@
 {
-  "fetched_at": "2025-12-12T06:05:52.653580+00:00",
+  "fetched_at": "2025-12-12T18:06:07.429217+00:00",
   "feeds": [
     {
       "id": "therecord",
       "source": "The Record from Recorded Future News",
       "url": "https://therecord.media/feed/",
       "items": [
+        {
+          "title": "Trump signs executive order on 'national framework' for AI regulation",
+          "link": "https://therecord.media/trump-executive-order-ai-national-framework",
+          "published": "Fri, 12 Dec 2025 17:08:39 GMT",
+          "summary": "Seeking to end a \"patchwork\" of state-level AI regulation, the president spelled out his administration's approach to letting companies \"be free to innovate.\""
+        },
+        {
+          "title": "Germany summons Russian ambassador over cyberattack, election disinformation",
+          "link": "https://therecord.media/germany-summons-russian-ambassador-cyberattack-disinformation",
+          "published": "Fri, 12 Dec 2025 15:42:04 GMT",
+          "summary": "Germany said it had \"clear evidence\" that a 2024 cyberattack on its air traffic control authority was the work of the Russian hacking operation known as APT28 or Fancy Bear."
+        },
         {
           "title": "New 'DroidLock' malware demands a ransom, locks user out of device",
           "link": "https://therecord.media/android-droidlock-malware-demands-ransom-locks-mobile-device",
@@ -47,18 +59,6 @@
           "link": "https://therecord.media/lawmaker-calls-facial-recognition-doorbell-cameras-privacy-nightmare",
           "published": "Wed, 10 Dec 2025 20:59:59 GMT",
           "summary": "Sen. Ed Markey (D-MA) asked Ring in October about its privacy policies and how it intends to protect individuals recorded by its new facial recognition technology feature called Familiar Faces."
-        },
-        {
-          "title": "DOJ, CISA warn of Russia-linked attacks targeting meat processing plants, nuclear regulatory entities and other critical infrastructure",
-          "link": "https://therecord.media/doj-cisa-warn-russia-hackers-targeting-critical-infrastructure",
-          "published": "Wed, 10 Dec 2025 19:58:16 GMT",
-          "summary": "The Cybersecurity and Infrastructure Security Agency (CISA), alongside several other U.S. and international agencies, released an advisory covering the cyberattacks launched by CyberArmyofRussia_Reborn (CARR), NoName057(16) and several related groups."
-        },
-        {
-          "title": "Flock cameras remained active in two cities where officials had asked for them to be turned off",
-          "link": "https://therecord.media/flock-safety-cameras-remained-active-after-cities-asked-turned-off",
-          "published": "Wed, 10 Dec 2025 19:47:02 GMT",
-          "summary": "Officials in Cambridge, Massachusetts, and Eugene, Oregon, found that some Flock Safety license plate readers were still active after the municipalities asked for services to be terminated."
         }
       ]
     }
