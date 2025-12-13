@@ -62,6 +62,86 @@
             color: #22c55e;
         }
 
+        /* Tools Dropdown */
+        .tools-container {
+            position: relative;
+        }
+
+        #tools-toggle {
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0;
+            font-family: inherit;
+        }
+
+        #tools-toggle:hover {
+            color: #22c55e;
+        }
+
+        #tools-toggle:focus {
+            outline: 2px solid #22c55e;
+            outline-offset: 2px;
+        }
+
+        #tools-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background-color: #0a0a0a;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            min-width: 250px;
+            display: none;
+            z-index: 1000;
+        }
+
+        #tools-menu.show {
+            display: block;
+        }
+
+        #tools-menu ul {
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+        }
+
+        #tools-menu li {
+            margin: 0;
+        }
+
+        #tools-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s;
+            font-size: 0.875rem;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        #tools-menu a:hover {
+            background-color: #1a1a1a;
+            color: #22c55e;
+        }
+
+        #tools-menu a:focus {
+            outline: 2px solid #22c55e;
+            outline-offset: -2px;
+            background-color: #1a1a1a;
+        }
+
         /* Main Container */
         .container {
             max-width: 1400px;
@@ -180,27 +260,7 @@
             background-color: rgba(0,0,0,0.90);
             padding: 1.5rem 2rem;
             margin-top: 0.75rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: flex-end;
-            gap: 2rem;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: #333333;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .footer-links a:hover {
-            color: #22c55e;
+            display: none;
         }
 
         /* Responsive Design */
@@ -224,9 +284,11 @@
                 gap: 1rem;
             }
 
-            .footer-links {
-                justify-content: center;
-                gap: 1rem;
+            #tools-menu {
+                left: 0;
+                right: auto;
+                min-width: 100%;
+                max-width: 300px;
             }
         }
     </style>
@@ -237,7 +299,20 @@
         <ul class="nav-links">
             <li><a href="#feed">News</a></li>
             <li><a href="#analysis">Analysis</a></li>
-            <li><a href="#about">Tools</a></li>
+            <li class="tools-container">
+                <button id="tools-toggle" aria-haspopup="true" aria-expanded="false">Tools ▾</button>
+                <div id="tools-menu" role="menu" aria-label="Tools menu">
+                    <ul>
+                        <li><a href="https://www.pizzint.watch/" target="_blank" rel="noopener noreferrer" role="menuitem">Bilateral Tension Monitor</a></li>
+                        <li><a href="https://h1dr4.dev/" target="_blank" rel="noopener noreferrer" role="menuitem">GDELT ODIN AI</a></li>
+                        <li><a href="https://worldtensionwatch.com/analytics" target="_blank" rel="noopener noreferrer" role="menuitem">Tension Watch</a></li>
+                        <li><a href="https://threatmap.bitdefender.com/" target="_blank" rel="noopener noreferrer" role="menuitem">Attack Map</a></li>
+                        <li><a href="https://blackkite.com/data-breaches-caused-by-third-parties" target="_blank" rel="noopener noreferrer" role="menuitem">SaaS BREACH DB</a></li>
+                        <li><a href="https://ipapi.is/most-abusive-asn.html" target="_blank" rel="noopener noreferrer" role="menuitem">ASN Blacklist</a></li>
+                        <li><a href="https://viz.greynoise.io" target="_blank" rel="noopener noreferrer" role="menuitem">Greynoise</a></li>
+                    </ul>
+                </div>
+            </li>
         </ul>
     </nav>
 
@@ -384,20 +459,94 @@
             }
         }
 
-        // Load feed when page loads
-        document.addEventListener('DOMContentLoaded', loadFeed);
+        // Load feed and initialize dropdown when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load feed
+            loadFeed();
+            
+            // Tools dropdown functionality
+            const toolsToggle = document.getElementById('tools-toggle');
+            const toolsMenu = document.getElementById('tools-menu');
+            const menuLinks = toolsMenu.querySelectorAll('a');
+
+            // Toggle dropdown
+            function toggleDropdown() {
+                const isExpanded = toolsToggle.getAttribute('aria-expanded') === 'true';
+                toolsToggle.setAttribute('aria-expanded', !isExpanded);
+                toolsMenu.classList.toggle('show');
+                
+                // Focus first menu item when opening with keyboard
+                if (!isExpanded) {
+                    menuLinks[0].focus();
+                }
+            }
+
+            // Close dropdown
+            function closeDropdown() {
+                toolsToggle.setAttribute('aria-expanded', 'false');
+                toolsMenu.classList.remove('show');
+            }
+
+            // Toggle on click
+            toolsToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleDropdown();
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', function(e) {
+                const isClickInsideMenu = toolsMenu.contains(e.target);
+                const isClickOnToggle = toolsToggle.contains(e.target);
+                
+                if (!isClickInsideMenu && !isClickOnToggle) {
+                    closeDropdown();
+                }
+            });
+
+            // Keyboard navigation
+            toolsToggle.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    if (toolsMenu.classList.contains('show')) {
+                        menuLinks[0].focus();
+                    } else {
+                        toggleDropdown();
+                    }
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    closeDropdown();
+                    toolsToggle.focus();
+                }
+            });
+
+            // Handle escape key in menu
+            toolsMenu.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    e.preventDefault();
+                    closeDropdown();
+                    toolsToggle.focus();
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const currentIndex = Array.from(menuLinks).indexOf(document.activeElement);
+                    if (currentIndex < menuLinks.length - 1) {
+                        menuLinks[currentIndex + 1].focus();
+                    }
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const currentIndex = Array.from(menuLinks).indexOf(document.activeElement);
+                    if (currentIndex > 0) {
+                        menuLinks[currentIndex - 1].focus();
+                    } else {
+                        toolsToggle.focus();
+                        closeDropdown();
+                    }
+                }
+            });
+        });
     </script>
 
     <footer>
-        <ul class="footer-links">
-            <li><a href="https://www.pizzint.watch/" target="_blank" rel="noopener noreferrer">Bilateral Tension Monitor</a></li>
-            <li><a href="https://h1dr4.dev/" target="_blank" rel="noopener noreferrer">GDELT ODIN AI</a></li>
-            <li><a href="https://worldtensionwatch.com/analytics" target="_blank" rel="noopener noreferrer">Tension Watch</a></li>
-            <li><a href="https://threatmap.bitdefender.com/" target="_blank" rel="noopener noreferrer">Attack Map</a></li>
-            <li><a href="https://blackkite.com/data-breaches-caused-by-third-parties" target="_blank" rel="noopener noreferrer">SaaS BREACH DB</a></li>
-            <li><a href="https://ipapi.is/most-abusive-asn.html" target="_blank" rel="noopener noreferrer">ASN Blacklist</a></li>
-            <li><a href="https://viz.greynoise.io" target="_blank" rel="noopener noreferrer">Greynoise</a></li>
-        </ul>
+        <!-- Footer hidden to avoid duplication of tools links -->
     </footer>
 </body>
 </html>
