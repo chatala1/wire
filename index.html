@@ -489,6 +489,7 @@
 
             // Toggle on click
             toolsToggle.addEventListener('click', function(e) {
+                // Stop event propagation to prevent the document click handler from interfering
                 e.stopPropagation();
                 toggleDropdown();
             });
