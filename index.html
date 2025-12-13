@@ -459,11 +459,12 @@
             }
         }
 
-        // Load feed when page loads
-        document.addEventListener('DOMContentLoaded', loadFeed);
-
-        // Tools dropdown functionality
+        // Load feed and initialize dropdown when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Load feed
+            loadFeed();
+            
+            // Tools dropdown functionality
             const toolsToggle = document.getElementById('tools-toggle');
             const toolsMenu = document.getElementById('tools-menu');
             const menuLinks = toolsMenu.querySelectorAll('a');
@@ -494,7 +495,10 @@
 
             // Close when clicking outside
             document.addEventListener('click', function(e) {
-                if (!toolsToggle.contains(e.target) && !toolsMenu.contains(e.target)) {
+                const isClickInsideMenu = toolsMenu.contains(e.target);
+                const isClickOnToggle = toolsToggle.contains(e.target);
+                
+                if (!isClickInsideMenu && !isClickOnToggle) {
                     closeDropdown();
                 }
             });
@@ -541,7 +545,7 @@
         });
     </script>
 
-    <footer style="display: none;">
+    <footer>
         <!-- Footer hidden to avoid duplication of tools links -->
     </footer>
 </body>
