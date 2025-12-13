@@ -63,7 +63,7 @@
         }
 
         /* Tools Dropdown */
-        .tools-wrapper {
+        .tools-container {
             position: relative;
         }
 
@@ -71,25 +71,27 @@
             background: none;
             border: none;
             color: #ffffff;
+            cursor: pointer;
             text-decoration: none;
             transition: color 0.3s;
             font-size: 0.8rem;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 1px;
-            cursor: pointer;
             padding: 0;
             font-family: inherit;
         }
 
-        #tools-toggle:hover,
-        #tools-toggle:focus {
+        #tools-toggle:hover {
             color: #22c55e;
-            outline: none;
+        }
+
+        #tools-toggle:focus {
+            outline: 2px solid #22c55e;
+            outline-offset: 2px;
         }
 
         #tools-menu {
-            display: none;
             position: absolute;
             top: 100%;
             right: 0;
@@ -99,6 +101,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
             min-width: 250px;
+            display: none;
             z-index: 1000;
         }
 
@@ -113,23 +116,30 @@
         }
 
         #tools-menu li {
-            padding: 0;
+            margin: 0;
         }
 
         #tools-menu a {
             display: block;
-            padding: 0.75rem 1.25rem;
+            padding: 0.75rem 1.5rem;
             color: #ffffff;
             text-decoration: none;
-            font-size: 0.875rem;
             transition: background-color 0.2s, color 0.2s;
+            font-size: 0.875rem;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: normal;
         }
 
-        #tools-menu a:hover,
-        #tools-menu a:focus {
+        #tools-menu a:hover {
             background-color: #1a1a1a;
             color: #22c55e;
-            outline: none;
+        }
+
+        #tools-menu a:focus {
+            outline: 2px solid #22c55e;
+            outline-offset: -2px;
+            background-color: #1a1a1a;
         }
 
         /* Main Container */
@@ -245,7 +255,13 @@
             margin-top: 0.5rem;
         }
 
-
+        /* Footer */
+        footer {
+            background-color: rgba(0,0,0,0.90);
+            padding: 1.5rem 2rem;
+            margin-top: 0.75rem;
+            display: none;
+        }
 
         /* Responsive Design */
         @media (max-width: 1024px) {
@@ -272,6 +288,7 @@
                 left: 0;
                 right: auto;
                 min-width: 100%;
+                max-width: 300px;
             }
         }
     </style>
@@ -282,9 +299,9 @@
         <ul class="nav-links">
             <li><a href="#feed">News</a></li>
             <li><a href="#analysis">Analysis</a></li>
-            <li class="tools-wrapper">
+            <li class="tools-container">
                 <button id="tools-toggle" aria-haspopup="true" aria-expanded="false">Tools ▾</button>
-                <div id="tools-menu" role="menu" aria-label="External Tools">
+                <div id="tools-menu" role="menu" aria-label="Tools menu">
                     <ul>
                         <li><a href="https://www.pizzint.watch/" target="_blank" rel="noopener noreferrer" role="menuitem">Bilateral Tension Monitor</a></li>
                         <li><a href="https://h1dr4.dev/" target="_blank" rel="noopener noreferrer" role="menuitem">GDELT ODIN AI</a></li>
@@ -442,63 +459,94 @@
             }
         }
 
-        // Load feed when page loads
-        document.addEventListener('DOMContentLoaded', loadFeed);
-
-        // Tools dropdown functionality
+        // Load feed and initialize dropdown when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Load feed
+            loadFeed();
+            
+            // Tools dropdown functionality
             const toolsToggle = document.getElementById('tools-toggle');
             const toolsMenu = document.getElementById('tools-menu');
+            const menuLinks = toolsMenu.querySelectorAll('a');
 
-            if (!toolsToggle || !toolsMenu) return;
+            // Toggle dropdown
+            function toggleDropdown() {
+                const isExpanded = toolsToggle.getAttribute('aria-expanded') === 'true';
+                toolsToggle.setAttribute('aria-expanded', !isExpanded);
+                toolsMenu.classList.toggle('show');
+                
+                // Focus first menu item when opening with keyboard
+                if (!isExpanded) {
+                    menuLinks[0].focus();
+                }
+            }
 
-            // Toggle dropdown on click
+            // Close dropdown
+            function closeDropdown() {
+                toolsToggle.setAttribute('aria-expanded', 'false');
+                toolsMenu.classList.remove('show');
+            }
+
+            // Toggle on click
             toolsToggle.addEventListener('click', function(e) {
                 e.stopPropagation();
-                const isExpanded = toolsToggle.getAttribute('aria-expanded') === 'true';
-                
-                if (isExpanded) {
-                    closeDropdown();
-                } else {
-                    openDropdown();
-                }
+                toggleDropdown();
             });
 
-            // Open dropdown and focus first item on ArrowDown
-            toolsToggle.addEventListener('keydown', function(e) {
-                if (e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    openDropdown();
-                    // Focus first menu item
-                    const firstLink = toolsMenu.querySelector('a');
-                    if (firstLink) firstLink.focus();
-                }
-            });
-
-            // Close on Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeDropdown();
-                }
-            });
-
-            // Close dropdown when clicking outside
+            // Close when clicking outside
             document.addEventListener('click', function(e) {
-                if (!toolsToggle.contains(e.target) && !toolsMenu.contains(e.target)) {
+                const isClickInsideMenu = toolsMenu.contains(e.target);
+                const isClickOnToggle = toolsToggle.contains(e.target);
+                
+                if (!isClickInsideMenu && !isClickOnToggle) {
                     closeDropdown();
                 }
             });
 
-            function openDropdown() {
-                toolsMenu.classList.add('show');
-                toolsToggle.setAttribute('aria-expanded', 'true');
-            }
+            // Keyboard navigation
+            toolsToggle.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    if (toolsMenu.classList.contains('show')) {
+                        menuLinks[0].focus();
+                    } else {
+                        toggleDropdown();
+                    }
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    closeDropdown();
+                    toolsToggle.focus();
+                }
+            });
 
-            function closeDropdown() {
-                toolsMenu.classList.remove('show');
-                toolsToggle.setAttribute('aria-expanded', 'false');
-            }
+            // Handle escape key in menu
+            toolsMenu.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    e.preventDefault();
+                    closeDropdown();
+                    toolsToggle.focus();
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const currentIndex = Array.from(menuLinks).indexOf(document.activeElement);
+                    if (currentIndex < menuLinks.length - 1) {
+                        menuLinks[currentIndex + 1].focus();
+                    }
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const currentIndex = Array.from(menuLinks).indexOf(document.activeElement);
+                    if (currentIndex > 0) {
+                        menuLinks[currentIndex - 1].focus();
+                    } else {
+                        toolsToggle.focus();
+                        closeDropdown();
+                    }
+                }
+            });
         });
     </script>
+
+    <footer>
+        <!-- Footer hidden to avoid duplication of tools links -->
+    </footer>
 </body>
 </html>
