@@ -1,11 +1,29 @@
 {
-  "fetched_at": "2025-12-12T18:06:07.429217+00:00",
+  "fetched_at": "2025-12-13T06:05:30.317821+00:00",
   "feeds": [
     {
       "id": "therecord",
       "source": "The Record from Recorded Future News",
       "url": "https://therecord.media/feed/",
       "items": [
+        {
+          "title": "Hamas-affiliated APT targeting government agencies in the Middle East, Morocco",
+          "link": "https://therecord.media/hamas-apt-targeting-government-agencies",
+          "published": "Fri, 12 Dec 2025 21:16:27 GMT",
+          "summary": "Palo Alto researchers said the recent activity involved a new strain of malware they call AshTag that has allowed them to steal information from key entities across the Middle East."
+        },
+        {
+          "title": "Canada’s privacy regulator to probe billboards equipped with facial scanning tech",
+          "link": "https://therecord.media/canada-privacy-regulator-to-probe-face-scanning-billboards",
+          "published": "Fri, 12 Dec 2025 19:49:40 GMT",
+          "summary": "The billboards, located near Toronto’s Union Station, reportedly analyze only the age and gender of people nearby, according to their owner."
+        },
+        {
+          "title": "More than 340,000 impacted by cyberattack on library in large Washington county",
+          "link": "https://therecord.media/over-340000-impacted-washington-state-library-hack",
+          "published": "Fri, 12 Dec 2025 19:05:25 GMT",
+          "summary": "The Pierce County Library System published breach notifications this week on its website and with regulators in several states, detailing an incident first discovered in April."
+        },
         {
           "title": "Trump signs executive order on 'national framework' for AI regulation",
           "link": "https://therecord.media/trump-executive-order-ai-national-framework",
@@ -41,24 +59,6 @@
           "link": "https://therecord.media/announced-nsa-deputy-director-pick-joe-francescon-not-taking-job",
           "published": "Thu, 11 Dec 2025 15:22:54 GMT",
           "summary": "Joe Francescon, announced in August as the NSA's new deputy director, will not be filling the role, sources told Recorded Future News, and the Trump administration has another pick in mind."
-        },
-        {
-          "title": "UK fines LastPass £1.2 million for data breach affecting 1.6 million people",
-          "link": "https://therecord.media/uk-fines-lastpass-over-1-million-data-breach",
-          "published": "Thu, 11 Dec 2025 14:58:54 GMT",
-          "summary": "The Information Commissioner’s Office said LastPass had “failed to implement sufficiently robust technical and security measures” to protect its data."
-        },
-        {
-          "title": "Federal agencies now only have one more day to patch React2Shell bug",
-          "link": "https://therecord.media/react4shell-vulnerability-cisa-shortens-patch-deadline",
-          "published": "Thu, 11 Dec 2025 16:11:32 GMT",
-          "summary": "Wide exploitation of the vulnerability known as React2Shell has prompted CISA to reduce the amount of time federal agencies have to patch the bug."
-        },
-        {
-          "title": "Lawmaker calls facial recognition on doorbell cameras a ‘privacy nightmare’",
-          "link": "https://therecord.media/lawmaker-calls-facial-recognition-doorbell-cameras-privacy-nightmare",
-          "published": "Wed, 10 Dec 2025 20:59:59 GMT",
-          "summary": "Sen. Ed Markey (D-MA) asked Ring in October about its privacy policies and how it intends to protect individuals recorded by its new facial recognition technology feature called Familiar Faces."
         }
       ]
     }
